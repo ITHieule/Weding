@@ -4671,7 +4671,7 @@ body.invite-opened .sample-cover__content {
 
 /* Phone-safe final opening overrides; keep this block last in the cascade. */
 .opening-card-wing {
-  transition: transform 1800ms cubic-bezier(0.18, 0.72, 0.22, 1), opacity 180ms ease 1620ms !important;
+  transition: transform 1900ms cubic-bezier(0.4, 0, 0.2, 1), opacity 220ms ease 1680ms !important;
   transform-style: flat;
   -webkit-transform-style: flat;
 }
@@ -4708,25 +4708,27 @@ body.invite-opened .sample-cover__content {
 }
 
 .opening-curtain.is-opening .opening-mist {
-  animation: opening-cloud-reveal 3000ms cubic-bezier(0.34, 0, 0.2, 1) both;
+  animation: opening-cloud-reveal 2600ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 @keyframes opening-cloud-reveal {
   0% { opacity: 0; }
-  18% { opacity: 0.96; }
-  54% { opacity: 0.96; }
-  80% { opacity: 0.68; }
+  14% { opacity: 0.2; }
+  30% { opacity: 0.86; }
+  48% { opacity: 0.9; }
+  56% { opacity: 0.9; }
+  78% { opacity: 0.34; }
   100% { opacity: 0; }
 }
 
 body.invite-opening-out .sample-cover,
 body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1000ms 1950ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: invitation-content-emerge 1250ms 1150ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 body.invite-opening-out .sample-cover__content,
 body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 900ms 2100ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: invitation-text-emerge 1150ms 1350ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4739,6 +4741,53 @@ body.invite-opened .sample-cover__content {
     animation-duration: 700ms;
   }
 
+  body.invite-opening-out .sample-cover,
+  body.invite-opened .sample-cover,
+  body.invite-opening-out .sample-cover__content,
+  body.invite-opened .sample-cover__content {
+    animation-duration: 600ms;
+    animation-delay: 300ms;
+  }
+}
+
+/* Smooth reveal: keep the photo and text on opacity-only animations for mobile Safari. */
+.opening-curtain.is-opening .opening-mist {
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@keyframes opening-cloud-reveal {
+  0% { opacity: 0; }
+  14% { opacity: 0.2; }
+  30% { opacity: 0.86; }
+  48% { opacity: 0.9; }
+  56% { opacity: 0.9; }
+  78% { opacity: 0.34; }
+  100% { opacity: 0; }
+}
+
+body.invite-opening-out .sample-cover,
+body.invite-opened .sample-cover {
+  animation: invitation-content-emerge 1100ms 800ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  will-change: opacity;
+}
+
+body.invite-opening-out .sample-cover__content,
+body.invite-opened .sample-cover__content {
+  animation: invitation-text-emerge 1000ms 950ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  will-change: opacity;
+}
+
+@keyframes invitation-content-emerge {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+@keyframes invitation-text-emerge {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
   body.invite-opening-out .sample-cover,
   body.invite-opened .sample-cover,
   body.invite-opening-out .sample-cover__content,
