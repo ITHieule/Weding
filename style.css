@@ -3795,10 +3795,17 @@ body.invite-opened .sample-cover__content {
     overflow: hidden;
   }
 
+  .thanks > .section__inner {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
   .thanks__frame {
-    width: 100vw;
-    max-width: 100vw;
-    margin-inline: calc(50% - 50vw);
+    width: 100%;
+    max-width: none;
+    min-height: clamp(560px, 100svh, 1100px);
+    margin: 0;
   }
 
   .thanks__media {
@@ -3812,5 +3819,17 @@ body.invite-opened .sample-cover__content {
     height: 100%;
     object-fit: cover;
     object-position: center 18%;
+  }
+}
+
+.opening-card-stage {
+  width: min(calc(100vw - 32px), 520px, calc(70svh - 182px));
+  height: auto;
+  aspect-ratio: 896 / 1280;
+}
+
+@media (max-height: 600px) {
+  .opening-card-stage {
+    width: min(calc(100vw - 32px), 420px, calc(70svh - 96px));
   }
 }
