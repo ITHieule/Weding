@@ -371,7 +371,6 @@ function setupOpenInvite() {
   if (!curtain || !selectors.openInvite) return;
 
   selectors.openInvite.addEventListener("click", () => {
-    if (curtain.classList.contains("is-opening")) return;
     selectors.openInvite.disabled = true;
     window.scrollTo(0, 0);
     curtain.classList.add("is-opening");
@@ -380,15 +379,12 @@ function setupOpenInvite() {
       playMusic();
     }
 
-    const openingDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 950 : 2700;
     window.setTimeout(() => {
       document.body.classList.remove("invite-locked", "invite-opening-out");
       document.body.classList.add("invite-opened");
       curtain.classList.add("is-open");
-      curtain.setAttribute("aria-hidden", "true");
-      curtain.hidden = true;
       window.scrollTo(0, 0);
-    }, openingDuration);
+    }, 2200);
   });
 }
 

@@ -2979,7 +2979,6 @@ body {
 
 .opening-curtain.is-open {
   visibility: hidden;
-  opacity: 0;
   pointer-events: none;
 }
 
@@ -3610,12 +3609,6 @@ body {
   }
 }
 
-.opening-curtain.is-open {
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
 /* Readable glass panel for the closing thank-you message over the photo. */
 .thanks__content {
   align-self: end;
@@ -4084,11 +4077,16 @@ body.invite-opened .hero-card {
   pointer-events: none;
   transform: scale(0.78);
   background:
-    radial-gradient(ellipse 44% 40% at 18% 22%, rgba(245, 247, 232, 0.32), transparent 100%),
-    radial-gradient(ellipse 50% 46% at 78% 30%, rgba(245, 247, 232, 0.3), transparent 100%),
-    radial-gradient(ellipse 50% 42% at 30% 70%, rgba(235, 243, 228, 0.28), transparent 100%),
-    radial-gradient(ellipse 46% 44% at 82% 76%, rgba(245, 247, 232, 0.28), transparent 100%);
-  mix-blend-mode: normal;
+    radial-gradient(ellipse 38% 42% at 16% 18%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
+    radial-gradient(ellipse 38% 42% at 50% 18%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
+    radial-gradient(ellipse 38% 42% at 84% 18%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
+    radial-gradient(ellipse 38% 42% at 16% 50%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
+    radial-gradient(ellipse 38% 42% at 50% 50%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
+    radial-gradient(ellipse 38% 42% at 84% 50%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
+    radial-gradient(ellipse 38% 42% at 16% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
+    radial-gradient(ellipse 38% 42% at 50% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
+    radial-gradient(ellipse 38% 42% at 84% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%);
+  mix-blend-mode: screen;
 }
 
 .opening-cloud-filter {
@@ -4104,38 +4102,43 @@ body.invite-opened .hero-card {
   inset: 0;
   border-radius: 0;
   content: "";
-  filter: blur(5px);
+  filter: blur(9px);
 }
 
 .opening-mist::before {
   background:
-    radial-gradient(ellipse 44% 42% at 15% 36%, rgba(255, 255, 248, 0.25), transparent 100%),
-    radial-gradient(ellipse 46% 44% at 76% 34%, rgba(255, 255, 248, 0.24), transparent 100%),
-    radial-gradient(ellipse 44% 42% at 32% 72%, rgba(255, 255, 248, 0.22), transparent 100%),
-    radial-gradient(ellipse 42% 42% at 86% 76%, rgba(255, 255, 248, 0.22), transparent 100%);
+    radial-gradient(ellipse 34% 36% at 8% 34%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 42% 34%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 76% 34%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 24% 68%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 58% 68%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 92% 68%, rgba(255, 255, 248, 0.38) 0, transparent 100%);
   opacity: 0;
 }
 
 .opening-mist::after {
   background:
-    radial-gradient(ellipse 46% 42% at 83% 18%, rgba(243, 248, 232, 0.23), transparent 100%),
-    radial-gradient(ellipse 42% 42% at 20% 56%, rgba(243, 248, 232, 0.23), transparent 100%),
-    radial-gradient(ellipse 48% 42% at 70% 68%, rgba(243, 248, 232, 0.22), transparent 100%);
+    radial-gradient(ellipse 34% 36% at 24% 32%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 58% 32%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 92% 32%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 8% 66%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 42% 66%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
+    radial-gradient(ellipse 34% 36% at 76% 66%, rgba(243, 248, 232, 0.38) 0, transparent 100%);
   opacity: 0;
 }
 
 .opening-curtain.is-opening .opening-mist {
-  animation: opening-mist-drift 1800ms ease-out both;
+  animation: opening-mist-drift 2200ms ease-out both;
   will-change: opacity, transform;
 }
 
 .opening-curtain.is-opening .opening-mist::before {
-  animation: opening-mist-layer-opacity 1800ms 0ms ease-out both;
+  animation: opening-mist-layer-opacity 2200ms 0ms ease-out both;
   will-change: opacity;
 }
 
 .opening-curtain.is-opening .opening-mist::after {
-  animation: opening-mist-layer-opacity 1800ms 0ms ease-out both;
+  animation: opening-mist-layer-opacity 2200ms 0ms ease-out both;
   will-change: opacity;
 }
 
@@ -4143,33 +4146,28 @@ body.invite-opened .hero-card {
   .opening-mist {
     filter: none;
     mix-blend-mode: normal;
-    background:
-      radial-gradient(ellipse 52% 36% at 16% 28%, rgba(245, 247, 232, 0.34), transparent 100%),
-      radial-gradient(ellipse 56% 38% at 82% 38%, rgba(245, 247, 232, 0.3), transparent 100%),
-      radial-gradient(ellipse 54% 34% at 34% 74%, rgba(235, 243, 228, 0.28), transparent 100%);
   }
 
   .opening-mist::before,
   .opening-mist::after {
-    display: none;
-    filter: none;
+    filter: blur(7px);
   }
 }
 
 @keyframes opening-mist-layer-opacity {
-  0% { opacity: 0; }
-  20% { opacity: 0.62; }
-  46% { opacity: 0.62; }
-  76% { opacity: 0.34; }
+  0% { opacity: 0.18; }
+  18% { opacity: 1; }
+  48% { opacity: 1; }
+  76% { opacity: 0.9; }
   100% { opacity: 0; }
 }
 
 @keyframes opening-mist-drift {
-  0% { opacity: 0; transform: scale(0.9); }
-  20% { opacity: 0.76; }
-  46% { opacity: 0.76; transform: scale(1); }
-  76% { opacity: 0.4; transform: scale(1.04); }
-  100% { opacity: 0; transform: scale(1.08); }
+  0% { opacity: 0.18; transform: scale(0.78); }
+  18% { opacity: 1; }
+  48% { opacity: 1; transform: scale(1); }
+  76% { opacity: 0.9; transform: scale(1.06); }
+  100% { opacity: 0; transform: scale(1.12); }
 }
 
 @keyframes opening-mist-left {
@@ -4188,22 +4186,22 @@ body.invite-opened .hero-card {
 
 body.invite-opening-out .sample-cover,
 body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1250ms 350ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: invitation-content-emerge 1900ms 1900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 body.invite-opening-out .sample-cover__content,
 body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 1050ms 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: invitation-text-emerge 1750ms 2350ms ease-out both;
 }
 
 @keyframes invitation-content-emerge {
-  from { opacity: 0.35; transform: scale(1.025); }
-  to { opacity: 1; transform: scale(1); }
+  from { opacity: 0.35; filter: blur(12px); transform: scale(1.045); }
+  to { opacity: 1; filter: blur(0); transform: scale(1); }
 }
 
 @keyframes invitation-text-emerge {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(16px); filter: blur(7px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4216,166 +4214,6 @@ body.invite-opened .sample-cover__content {
   body.invite-opened .sample-cover__content {
     animation-duration: 450ms;
     animation-delay: 0ms;
-  }
-}
-
-/* Final overrides: keep both full wings completely outside the phone viewport. */
-.opening-card-wing {
-  transition:
-    transform 1450ms cubic-bezier(0.18, 0.72, 0.22, 1),
-    opacity 180ms ease 1270ms !important;
-  transform-style: flat;
-  -webkit-transform-style: flat;
-}
-
-.opening-curtain.is-opening .opening-card-wing--left {
-  transform: translate3d(calc(-100vw - 100%), 0, 0) !important;
-  opacity: 0;
-}
-
-.opening-curtain.is-opening .opening-card-wing--right {
-  transform: translate3d(calc(100vw + 100%), 0, 0) !important;
-  opacity: 0;
-}
-
-.opening-mist {
-  inset: -5%;
-  opacity: 0;
-  transform: none;
-  background:
-    radial-gradient(ellipse 52% 38% at 13% 24%, rgba(255, 255, 250, 0.7), transparent 100%),
-    radial-gradient(ellipse 54% 42% at 73% 22%, rgba(255, 255, 250, 0.66), transparent 100%),
-    radial-gradient(ellipse 58% 42% at 34% 68%, rgba(250, 252, 244, 0.68), transparent 100%),
-    radial-gradient(ellipse 54% 43% at 88% 72%, rgba(255, 255, 250, 0.64), transparent 100%),
-    radial-gradient(ellipse 44% 44% at 53% 44%, rgba(255, 255, 250, 0.48), transparent 100%);
-  mix-blend-mode: normal;
-  will-change: opacity;
-}
-
-.opening-mist::before,
-.opening-mist::after {
-  display: none !important;
-  animation: none !important;
-  filter: none !important;
-}
-
-.opening-curtain.is-opening .opening-mist {
-  animation: opening-cloud-reveal 2350ms cubic-bezier(0.34, 0, 0.2, 1) both;
-}
-
-@keyframes opening-cloud-reveal {
-  0% { opacity: 0; }
-  20% { opacity: 0.96; }
-  52% { opacity: 0.96; }
-  76% { opacity: 0.72; }
-  100% { opacity: 0; }
-}
-
-body.invite-opening-out .sample-cover,
-body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1000ms 1450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-body.invite-opening-out .sample-cover__content,
-body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 900ms 1600ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .opening-card-wing {
-    transition-duration: 400ms !important;
-    transition-delay: 0ms !important;
-  }
-
-  .opening-curtain.is-opening .opening-mist {
-    animation-duration: 700ms;
-  }
-
-  body.invite-opening-out .sample-cover,
-  body.invite-opened .sample-cover,
-  body.invite-opening-out .sample-cover__content,
-  body.invite-opened .sample-cover__content {
-    animation-duration: 600ms;
-    animation-delay: 300ms;
-  }
-}
-
-/* Final Safari-friendly timing: finish the wing sweep before revealing the cover. */
-.opening-card-wing {
-  transition:
-    transform 1450ms cubic-bezier(0.18, 0.72, 0.22, 1),
-    opacity 180ms ease 1270ms !important;
-  transform-style: flat;
-  -webkit-transform-style: flat;
-}
-
-.opening-curtain.is-opening .opening-card-wing--left {
-  transform: translate3d(calc(-100vw - 100%), 0, 0) !important;
-  opacity: 0;
-}
-
-.opening-curtain.is-opening .opening-card-wing--right {
-  transform: translate3d(calc(100vw + 100%), 0, 0) !important;
-  opacity: 0;
-}
-
-.opening-mist {
-  inset: -5%;
-  background:
-    radial-gradient(ellipse 52% 38% at 13% 24%, rgba(255, 255, 250, 0.7), transparent 100%),
-    radial-gradient(ellipse 54% 42% at 73% 22%, rgba(255, 255, 250, 0.66), transparent 100%),
-    radial-gradient(ellipse 58% 42% at 34% 68%, rgba(250, 252, 244, 0.68), transparent 100%),
-    radial-gradient(ellipse 54% 43% at 88% 72%, rgba(255, 255, 250, 0.64), transparent 100%),
-    radial-gradient(ellipse 44% 44% at 53% 44%, rgba(255, 255, 250, 0.48), transparent 100%);
-  transform: none;
-  will-change: opacity;
-}
-
-.opening-mist::before,
-.opening-mist::after {
-  display: none !important;
-  animation: none !important;
-  filter: none !important;
-}
-
-.opening-curtain.is-opening .opening-mist {
-  animation: opening-cloud-reveal 2350ms cubic-bezier(0.34, 0, 0.2, 1) both;
-}
-
-@keyframes opening-cloud-reveal {
-  0% { opacity: 0; }
-  20% { opacity: 0.96; }
-  52% { opacity: 0.96; }
-  76% { opacity: 0.72; }
-  100% { opacity: 0; }
-}
-
-body.invite-opening-out .sample-cover,
-body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1000ms 1450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-body.invite-opening-out .sample-cover__content,
-body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 900ms 1600ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .opening-card-wing {
-    transition-duration: 400ms !important;
-    transition-delay: 0ms !important;
-  }
-
-  .opening-curtain.is-opening .opening-mist {
-    animation-duration: 700ms;
-  }
-
-  body.invite-opening-out .sample-cover,
-  body.invite-opened .sample-cover,
-  body.invite-opening-out .sample-cover__content,
-  body.invite-opened .sample-cover__content {
-    animation-duration: 600ms;
-    animation-delay: 300ms;
   }
 }
 
@@ -4518,281 +4356,5 @@ body.invite-opened .sample-cover__content {
 
   .opening-flourish--bottom {
     margin-top: 10px;
-  }
-}
-
-.opening-card-wing {
-  transition: transform 1500ms cubic-bezier(0.22, 0.61, 0.36, 1);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform;
-}
-
-.opening-curtain.is-opening .opening-card-wing--left {
-  transform: translate3d(-112%, 0, 0);
-}
-
-.opening-curtain.is-opening .opening-card-wing--right {
-  transform: translate3d(112%, 0, 0);
-}
-
-.opening-curtain[hidden],
-.opening-curtain.is-open {
-  display: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .opening-card-wing {
-    transition-duration: 450ms;
-  }
-}
-
-/* A single, synchronized opening sequence: smooth wings, visible white cloud, then reveal. */
-.opening-curtain {
-  background: linear-gradient(145deg, #254c39, #173a2b 52%, #102d21);
-}
-
-.opening-curtain::after {
-  display: none;
-  transition: none;
-}
-
-.opening-card-wing {
-  transition: transform 1500ms cubic-bezier(0.22, 0.61, 0.36, 1) !important;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform;
-}
-
-.opening-curtain.is-opening .opening-card-wing--left {
-  transform: translate3d(-112%, 0, 0) !important;
-}
-
-.opening-curtain.is-opening .opening-card-wing--right {
-  transform: translate3d(112%, 0, 0) !important;
-}
-
-.opening-mist {
-  inset: -8%;
-  opacity: 0;
-  transform: none;
-  background:
-    radial-gradient(ellipse 54% 42% at 14% 23%, rgba(255, 255, 249, 0.62), transparent 100%),
-    radial-gradient(ellipse 54% 46% at 76% 27%, rgba(255, 255, 249, 0.58), transparent 100%),
-    radial-gradient(ellipse 56% 42% at 32% 73%, rgba(250, 252, 242, 0.58), transparent 100%),
-    radial-gradient(ellipse 52% 46% at 90% 74%, rgba(255, 255, 249, 0.55), transparent 100%),
-    radial-gradient(ellipse 45% 48% at 52% 50%, rgba(255, 255, 249, 0.42), transparent 100%);
-  mix-blend-mode: normal;
-  will-change: opacity;
-}
-
-.opening-mist::before,
-.opening-mist::after {
-  filter: none;
-}
-
-.opening-mist::before {
-  background:
-    radial-gradient(ellipse 48% 40% at 30% 30%, rgba(255, 255, 252, 0.56), transparent 100%),
-    radial-gradient(ellipse 52% 44% at 88% 45%, rgba(255, 255, 252, 0.54), transparent 100%),
-    radial-gradient(ellipse 50% 42% at 15% 78%, rgba(250, 252, 244, 0.5), transparent 100%);
-}
-
-.opening-mist::after {
-  background:
-    radial-gradient(ellipse 48% 42% at 82% 17%, rgba(255, 255, 252, 0.52), transparent 100%),
-    radial-gradient(ellipse 54% 42% at 45% 56%, rgba(255, 255, 252, 0.48), transparent 100%),
-    radial-gradient(ellipse 48% 42% at 62% 84%, rgba(250, 252, 244, 0.5), transparent 100%);
-}
-
-.opening-curtain.is-opening .opening-mist {
-  animation: opening-cloud-reveal 2200ms cubic-bezier(0.32, 0, 0.2, 1) both;
-}
-
-.opening-curtain.is-opening .opening-mist::before {
-  animation: opening-cloud-layer 2200ms cubic-bezier(0.32, 0, 0.2, 1) both;
-}
-
-.opening-curtain.is-opening .opening-mist::after {
-  animation: opening-cloud-layer 2200ms cubic-bezier(0.32, 0, 0.2, 1) 80ms both;
-}
-
-@keyframes opening-cloud-reveal {
-  0% { opacity: 0; }
-  22% { opacity: 0.92; }
-  52% { opacity: 0.92; }
-  78% { opacity: 0.68; }
-  100% { opacity: 0; }
-}
-
-@keyframes opening-cloud-layer {
-  0% { opacity: 0; }
-  24% { opacity: 0.78; }
-  55% { opacity: 0.78; }
-  82% { opacity: 0.42; }
-  100% { opacity: 0; }
-}
-
-body.invite-opening-out .sample-cover,
-body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1050ms 1150ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-body.invite-opening-out .sample-cover__content,
-body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 950ms 1320ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-@supports (-webkit-touch-callout: none) {
-  .opening-mist,
-  .opening-mist::before,
-  .opening-mist::after {
-    filter: none !important;
-    mix-blend-mode: normal;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .opening-curtain.is-opening .opening-mist,
-  .opening-curtain.is-opening .opening-mist::before,
-  .opening-curtain.is-opening .opening-mist::after {
-    animation-duration: 500ms;
-    animation-delay: 0ms;
-  }
-
-  body.invite-opening-out .sample-cover,
-  body.invite-opened .sample-cover,
-  body.invite-opening-out .sample-cover__content,
-  body.invite-opened .sample-cover__content {
-    animation-duration: 450ms;
-    animation-delay: 0ms;
-  }
-}
-
-/* Phone-safe final opening overrides; keep this block last in the cascade. */
-.opening-card-wing {
-  transition: transform 1900ms cubic-bezier(0.4, 0, 0.2, 1), opacity 220ms ease 1680ms !important;
-  transform-style: flat;
-  -webkit-transform-style: flat;
-}
-
-.opening-curtain.is-opening .opening-card-wing--left {
-  transform: translate3d(calc(-100vw - 100%), 0, 0) !important;
-  opacity: 0;
-}
-
-.opening-curtain.is-opening .opening-card-wing--right {
-  transform: translate3d(calc(100vw + 100%), 0, 0) !important;
-  opacity: 0;
-}
-
-.opening-mist {
-  inset: -5%;
-  opacity: 0;
-  transform: none;
-  background:
-    radial-gradient(ellipse 52% 38% at 13% 24%, rgba(255, 255, 250, 0.7), transparent 100%),
-    radial-gradient(ellipse 54% 42% at 73% 22%, rgba(255, 255, 250, 0.66), transparent 100%),
-    radial-gradient(ellipse 58% 42% at 34% 68%, rgba(250, 252, 244, 0.68), transparent 100%),
-    radial-gradient(ellipse 54% 43% at 88% 72%, rgba(255, 255, 250, 0.64), transparent 100%),
-    radial-gradient(ellipse 44% 44% at 53% 44%, rgba(255, 255, 250, 0.48), transparent 100%);
-  mix-blend-mode: normal;
-  will-change: opacity;
-}
-
-.opening-mist::before,
-.opening-mist::after {
-  display: none !important;
-  animation: none !important;
-  filter: none !important;
-}
-
-.opening-curtain.is-opening .opening-mist {
-  animation: opening-cloud-reveal 2600ms cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-
-@keyframes opening-cloud-reveal {
-  0% { opacity: 0; }
-  14% { opacity: 0.2; }
-  30% { opacity: 0.86; }
-  48% { opacity: 0.9; }
-  56% { opacity: 0.9; }
-  78% { opacity: 0.34; }
-  100% { opacity: 0; }
-}
-
-body.invite-opening-out .sample-cover,
-body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1250ms 1150ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-body.invite-opening-out .sample-cover__content,
-body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 1150ms 1350ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .opening-card-wing {
-    transition-duration: 400ms !important;
-    transition-delay: 0ms !important;
-  }
-
-  .opening-curtain.is-opening .opening-mist {
-    animation-duration: 700ms;
-  }
-
-  body.invite-opening-out .sample-cover,
-  body.invite-opened .sample-cover,
-  body.invite-opening-out .sample-cover__content,
-  body.invite-opened .sample-cover__content {
-    animation-duration: 600ms;
-    animation-delay: 300ms;
-  }
-}
-
-/* Smooth reveal: keep the photo and text on opacity-only animations for mobile Safari. */
-.opening-curtain.is-opening .opening-mist {
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-@keyframes opening-cloud-reveal {
-  0% { opacity: 0; }
-  14% { opacity: 0.2; }
-  30% { opacity: 0.86; }
-  48% { opacity: 0.9; }
-  56% { opacity: 0.9; }
-  78% { opacity: 0.34; }
-  100% { opacity: 0; }
-}
-
-body.invite-opening-out .sample-cover,
-body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1100ms 800ms cubic-bezier(0.4, 0, 0.2, 1) both;
-  will-change: opacity;
-}
-
-body.invite-opening-out .sample-cover__content,
-body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 1000ms 950ms cubic-bezier(0.4, 0, 0.2, 1) both;
-  will-change: opacity;
-}
-
-@keyframes invitation-content-emerge {
-  from { opacity: 0.2; }
-  to { opacity: 1; }
-}
-
-@keyframes invitation-text-emerge {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body.invite-opening-out .sample-cover,
-  body.invite-opened .sample-cover,
-  body.invite-opening-out .sample-cover__content,
-  body.invite-opened .sample-cover__content {
-    animation-duration: 600ms;
-    animation-delay: 300ms;
   }
 }
