@@ -3849,3 +3849,65 @@ body.invite-opened .sample-cover__content {
     bottom: max(16px, 4svh);
   }
 }
+
+/* Balance the card and both ornaments within the actual mobile viewport. */
+.opening-curtain {
+  grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+  justify-items: center;
+  align-items: center;
+  row-gap: 0;
+  padding-block: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-bottom));
+}
+
+.opening-flourish {
+  position: relative;
+  left: auto;
+  grid-column: 1;
+  justify-self: center;
+  width: min(230px, 54vw);
+}
+
+.opening-flourish--top {
+  grid-row: 1;
+  top: auto;
+  bottom: 0;
+  align-self: end;
+  margin-bottom: clamp(12px, 2.5svh, 28px);
+  transform: none;
+}
+
+.opening-card-stage {
+  grid-row: 2;
+  align-self: center;
+}
+
+.opening-flourish--bottom {
+  grid-row: 3;
+  top: auto;
+  bottom: auto;
+  align-self: start;
+  margin-top: clamp(12px, 2.5svh, 28px);
+  transform: rotate(180deg);
+}
+
+.opening-curtain.is-opening .opening-flourish--top {
+  transform: translateY(-12px);
+}
+
+.opening-curtain.is-opening .opening-flourish--bottom {
+  transform: translateY(12px) rotate(180deg);
+}
+
+@media (max-height: 600px) {
+  .opening-flourish {
+    width: min(190px, 48vw);
+  }
+
+  .opening-flourish--top {
+    margin-bottom: 10px;
+  }
+
+  .opening-flourish--bottom {
+    margin-top: 10px;
+  }
+}
