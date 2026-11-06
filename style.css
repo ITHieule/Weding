@@ -4671,7 +4671,7 @@ body.invite-opened .sample-cover__content {
 
 /* Phone-safe final opening overrides; keep this block last in the cascade. */
 .opening-card-wing {
-  transition: transform 1450ms cubic-bezier(0.18, 0.72, 0.22, 1), opacity 180ms ease 1270ms !important;
+  transition: transform 1800ms cubic-bezier(0.18, 0.72, 0.22, 1), opacity 180ms ease 1620ms !important;
   transform-style: flat;
   -webkit-transform-style: flat;
 }
@@ -4708,25 +4708,25 @@ body.invite-opened .sample-cover__content {
 }
 
 .opening-curtain.is-opening .opening-mist {
-  animation: opening-cloud-reveal 2350ms cubic-bezier(0.34, 0, 0.2, 1) both;
+  animation: opening-cloud-reveal 3000ms cubic-bezier(0.34, 0, 0.2, 1) both;
 }
 
 @keyframes opening-cloud-reveal {
   0% { opacity: 0; }
-  20% { opacity: 0.96; }
-  52% { opacity: 0.96; }
-  76% { opacity: 0.72; }
+  18% { opacity: 0.96; }
+  54% { opacity: 0.96; }
+  80% { opacity: 0.68; }
   100% { opacity: 0; }
 }
 
 body.invite-opening-out .sample-cover,
 body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1000ms 1450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: invitation-content-emerge 1000ms 1950ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 body.invite-opening-out .sample-cover__content,
 body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 900ms 1600ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: invitation-text-emerge 900ms 2100ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
