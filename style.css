@@ -4125,17 +4125,17 @@ body.invite-opened .hero-card {
 }
 
 .opening-curtain.is-opening .opening-mist {
-  animation: opening-mist-drift 1500ms ease-out both;
+  animation: opening-mist-drift 1800ms ease-out both;
   will-change: opacity, transform;
 }
 
 .opening-curtain.is-opening .opening-mist::before {
-  animation: opening-mist-layer-opacity 1500ms 0ms ease-out both;
+  animation: opening-mist-layer-opacity 1800ms 0ms ease-out both;
   will-change: opacity;
 }
 
 .opening-curtain.is-opening .opening-mist::after {
-  animation: opening-mist-layer-opacity 1500ms 0ms ease-out both;
+  animation: opening-mist-layer-opacity 1800ms 0ms ease-out both;
   will-change: opacity;
 }
 
@@ -4183,12 +4183,14 @@ body.invite-opened .hero-card {
 
 body.invite-opening-out .sample-cover,
 body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1700ms 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: invitation-content-emerge 1300ms 450ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  will-change: opacity, transform;
 }
 
 body.invite-opening-out .sample-cover__content,
 body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 1500ms 850ms ease-out both;
+  animation: invitation-text-emerge 1150ms 650ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  will-change: opacity, transform;
 }
 
 @keyframes invitation-content-emerge {
@@ -4353,5 +4355,26 @@ body.invite-opened .sample-cover__content {
 
   .opening-flourish--bottom {
     margin-top: 10px;
+  }
+}
+
+.opening-card-wing {
+  transition: transform 1500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+.opening-curtain.is-opening .opening-card-wing--left {
+  transform: translate3d(-112%, 0, 0);
+}
+
+.opening-curtain.is-opening .opening-card-wing--right {
+  transform: translate3d(112%, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-card-wing {
+    transition-duration: 450ms;
   }
 }
