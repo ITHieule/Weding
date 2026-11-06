@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261106-04">
+  <link rel="stylesheet" href="style.css?v=20261106-05">
 </head>
 <body class="invite-locked">
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -142,7 +142,7 @@
         <div class="section-heading">
           <p class="eyebrow">With love</p>
           <h2 class="section-title">Gửi lời chúc</h2>
-          <p class="guestbook__intro">Để lưu và chia sẻ lời chúc cho mọi người cùng xem, thiệp cần được kết nối với một dịch vụ lưu trữ trực tuyến.</p>
+          <p class="guestbook__intro">Gửi lời chúc để lưu vào sổ lời chúc của gia đình và cùng chia sẻ niềm vui.</p>
         </div>
         <form class="guestbook__form" id="wishForm">
           <label>Tên của bạn<input name="name" autocomplete="name" required placeholder="Nhập tên của bạn"></label>
@@ -150,6 +150,9 @@
           <button class="button button--primary" type="submit">Gửi lời chúc</button>
           <p class="guestbook__status" id="wishStatus" role="status">Lời chúc sẽ được chuyển đến gia đình sau khi bạn gửi.</p>
         </form>
+        <div class="guestbook__messages" id="wishList" aria-live="polite" aria-busy="true">
+          <p class="guestbook__empty">Đang tải lời chúc…</p>
+        </div>
       </div>
     </section>
 
@@ -236,6 +239,6 @@
     <img id="lightboxImage" alt="Ảnh cưới phóng to">
   </div>
 
-  <script src="script.js?v=20261106-02"></script>
+  <script src="script.js?v=20261106-03"></script>
 </body>
 </html>

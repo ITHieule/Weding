@@ -2475,6 +2475,57 @@ body {
   text-align: center;
 }
 
+.guestbook__messages {
+  display: grid;
+  gap: 12px;
+  max-width: 620px;
+  margin: 28px auto 0;
+}
+
+.guestbook__messages-title {
+  margin: 0 0 4px;
+  color: var(--rose-deep);
+  font-family: var(--script);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  text-align: center;
+}
+
+.guestbook__empty {
+  margin: 0;
+  padding: 18px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.guestbook__message {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--rose-deep);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 8px 22px rgba(35, 66, 53, 0.05);
+}
+
+.guestbook__message-name {
+  margin: 0 0 6px;
+  color: var(--rose-deep);
+  font-weight: 800;
+}
+
+.guestbook__message-text {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.guestbook__message-date {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
 .opening-curtain {
   position: fixed;
   inset: max(8px, env(safe-area-inset-top)) clamp(10px, 5.5vw, 26px) max(8px, env(safe-area-inset-bottom));

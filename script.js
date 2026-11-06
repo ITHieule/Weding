@@ -41,7 +41,7 @@ const CARD_CONFIGS = {
 
 const ASSET_VERSION = "20260512-03";
 // Paste the deployed Google Apps Script Web App URL here (ending in /exec).
-const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwPNPvH48aJYrLoBhkcOie_mXpknEU7w6ZeaCQP7sLrgtqq_HBAn01-taPaJorzwwg/exec";
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbyhavXWOeGv9BZ0HItTVsxBqn5VxjolCV7gczB65It_q9U024xQLt3wqg8yFnzmxL8/exec";
 
 const state = {
   config: mergeConfig(getCurrentConfig()),
@@ -448,6 +448,7 @@ function setupMap() {
 }
 
 function setupGuestForms() {
+  loadWishList();
   const forms = [
     [document.getElementById("wishForm"), document.getElementById("wishStatus"), "wish"],
     [document.getElementById("rsvpForm"), document.getElementById("rsvpStatus"), "rsvp"]
@@ -482,6 +483,7 @@ function setupGuestForms() {
         });
         status.textContent = "Đã gửi yêu cầu. Cảm ơn bạn đã chia sẻ!";
         form.reset();
+        if (type === "wish") loadWishList();
       } catch (error) {
         status.textContent = "Gửi chưa thành công. Vui lòng kiểm tra kết nối rồi thử lại.";
       } finally {
@@ -492,6 +494,68 @@ function setupGuestForms() {
       }
     });
   });
+}
+
+function loadWishList() {
+  const list = document.getElementById("wishList");
+  if (!list || !FORM_ENDPOINT) return;
+
+  list.setAttribute("aria-busy", "true");
+  const callbackName = `weddingWishCallback_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+  const script = document.createElement("script");
+  const timeout = window.setTimeout(() => finishWithMessage("Chưa tải được lời chúc. Vui lòng thử tải lại trang."), 15000);
+
+  const cleanup = () => {
+    window.clearTimeout(timeout);
+    script.remove();
+    delete window[callbackName];
+  };
+  const finishWithMessage = (message) => {
+    cleanup();
+    list.setAttribute("aria-busy", "false");
+    list.replaceChildren(createWishText(message, "guestbook__empty"));
+  };
+
+  window[callbackName] = (result) => {
+    cleanup();
+    list.setAttribute("aria-busy", "false");
+    if (!result || !result.ok || !Array.isArray(result.wishes)) {
+      list.replaceChildren(createWishText("Chưa tải được lời chúc. Vui lòng thử tải lại trang.", "guestbook__empty"));
+      return;
+    }
+
+    if (result.wishes.length === 0) {
+      list.replaceChildren(createWishText("Chưa có lời chúc nào. Hãy gửi lời chúc đầu tiên nhé!", "guestbook__empty"));
+      return;
+    }
+
+    const heading = createWishText("Lời chúc từ khách mời", "guestbook__messages-title");
+    const cards = result.wishes.map((wish) => {
+      const card = document.createElement("article");
+      card.className = "guestbook__message";
+      const name = createWishText(wish.name || "Một vị khách", "guestbook__message-name");
+      const message = createWishText(wish.message || "", "guestbook__message-text");
+      card.append(name, message);
+      if (wish.date) card.append(createWishText(wish.date, "guestbook__message-date"));
+      return card;
+    });
+    list.replaceChildren(heading, ...cards);
+  };
+
+  script.onerror = () => finishWithMessage("Chưa tải được lời chúc. Vui lòng thử tải lại trang.");
+  const url = new URL(FORM_ENDPOINT);
+  url.searchParams.set("mode", "wishes");
+  url.searchParams.set("callback", callbackName);
+  url.searchParams.set("_", String(Date.now()));
+  script.src = url.toString();
+  document.head.appendChild(script);
+}
+
+function createWishText(text, className) {
+  const element = document.createElement("p");
+  element.className = className;
+  element.textContent = String(text || "");
+  return element;
 }
 
 function setupGiftBox() {

@@ -1,4 +1,39 @@
+// This is the Google Sheet ID (from its /spreadsheets/d/<ID>/edit URL),
+// not the Apps Script deployment ID.
 const SPREADSHEET_ID = "1BvzKgFkpAou14qO6251ziCuMcUNY1_dlJ8hBq_gGHLc";
+
+function doGet(e) {
+  const params = (e && e.parameter) || {};
+  if (params.mode !== "wishes") return jsonResponse({ ok: true, message: "Wedding form endpoint is ready." });
+
+  const callback = String(params.callback || "").trim();
+  if (!/^[A-Za-z_$][0-9A-Za-z_$]*$/.test(callback)) {
+    return jsonResponse({ ok: false, error: "invalid_callback" });
+  }
+
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = spreadsheet.getSheetByName("Lời chúc");
+  const wishes = [];
+  if (sheet && sheet.getLastRow() > 1) {
+    const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, 3).getValues();
+    rows.slice(-50).reverse().forEach((row) => {
+      const name = displayCell(row[1]);
+      const message = displayCell(row[2]);
+      if (!name || !message) return;
+      wishes.push({
+        name,
+        message,
+        date: row[0] instanceof Date
+          ? Utilities.formatDate(row[0], Session.getScriptTimeZone(), "dd/MM/yyyy HH:mm")
+          : String(row[0] || "")
+      });
+    });
+  }
+
+  return ContentService
+    .createTextOutput(`${callback}(${JSON.stringify({ ok: true, wishes })});`)
+    .setMimeType(ContentService.MimeType.JAVASCRIPT);
+}
 
 function doPost(e) {
   const params = (e && e.parameter) || {};
@@ -49,6 +84,11 @@ function cleanCell(value, maxLength) {
   let result = String(value || "").trim().slice(0, maxLength);
   if (/^[=+@-]/.test(result)) result = "'" + result;
   return result;
+}
+
+function displayCell(value) {
+  const result = String(value || "").trim();
+  return /^'[=+@-]/.test(result) ? result.slice(1) : result;
 }
 
 function jsonResponse(data) {
