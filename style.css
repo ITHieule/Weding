@@ -3858,11 +3858,11 @@ body {
 }
 
 .opening-curtain.is-opening .opening-card-wing--left {
-  transform: translateX(-112%);
+  transform: translateX(-220%);
 }
 
 .opening-curtain.is-opening .opening-card-wing--right {
-  transform: translateX(112%);
+  transform: translateX(220%);
 }
 
 body.invite-opening-out .hero-card,
