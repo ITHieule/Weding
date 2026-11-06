@@ -1235,6 +1235,8 @@ body.invite-opened .hero-card {
   background: #fffdf8;
   box-shadow: 0 24px 68px rgba(96, 62, 52, 0.14);
   cursor: zoom-in;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .family-photo:focus-visible {
   outline: 2px solid var(--rose-deep, #6b7f62);

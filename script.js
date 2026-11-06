@@ -451,11 +451,8 @@ function setupLightbox() {
     figure.setAttribute("aria-label", "Phóng to " + (img.alt || "ảnh"));
     const open = () => openGalleryImage(img.currentSrc || img.src);
     figure.addEventListener("click", open);
-    figure.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        open();
-      }
+    figure.addEventListener("pointerup", (event) => {
+      if (event.pointerType === "touch") open();
     });
   });
 }
