@@ -3828,8 +3828,24 @@ body.invite-opened .sample-cover__content {
   aspect-ratio: 896 / 1280;
 }
 
+.opening-flourish--top {
+  top: max(28px, 7svh);
+}
+
+.opening-flourish--bottom {
+  bottom: max(28px, 7svh);
+}
+
 @media (max-height: 600px) {
   .opening-card-stage {
     width: min(calc(100vw - 32px), 420px, calc(70svh - 96px));
+  }
+
+  .opening-flourish--top {
+    top: max(16px, 4svh);
+  }
+
+  .opening-flourish--bottom {
+    bottom: max(16px, 4svh);
   }
 }
