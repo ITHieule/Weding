@@ -4086,7 +4086,6 @@ body.invite-opened .hero-card {
     radial-gradient(ellipse 38% 42% at 16% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
     radial-gradient(ellipse 38% 42% at 50% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
     radial-gradient(ellipse 38% 42% at 84% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%);
-  filter: url(#openingCloudFilter);
   mix-blend-mode: screen;
 }
 
@@ -4103,7 +4102,7 @@ body.invite-opened .hero-card {
   inset: 0;
   border-radius: 0;
   content: "";
-  filter: blur(13px);
+  filter: blur(9px);
 }
 
 .opening-mist::before {
@@ -4129,15 +4128,30 @@ body.invite-opened .hero-card {
 }
 
 .opening-curtain.is-opening .opening-mist {
-  animation: opening-mist-drift 2900ms ease-out both;
+  animation: opening-mist-drift 2200ms ease-out both;
+  will-change: opacity, transform;
 }
 
 .opening-curtain.is-opening .opening-mist::before {
-  animation: opening-mist-layer-opacity 2900ms 0ms ease-out both;
+  animation: opening-mist-layer-opacity 2200ms 0ms ease-out both;
+  will-change: opacity;
 }
 
 .opening-curtain.is-opening .opening-mist::after {
-  animation: opening-mist-layer-opacity 2900ms 0ms ease-out both;
+  animation: opening-mist-layer-opacity 2200ms 0ms ease-out both;
+  will-change: opacity;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .opening-mist {
+    filter: none;
+    mix-blend-mode: normal;
+  }
+
+  .opening-mist::before,
+  .opening-mist::after {
+    filter: blur(7px);
+  }
 }
 
 @keyframes opening-mist-layer-opacity {

@@ -31,7 +31,7 @@ const CARD_CONFIGS = {
       { icon: "∞", title: "Ngày chung vui", date: "Thứ Bảy - Chủ Nhật | 28–29.11.2026", text: "Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi." }
     ],
     schedule: [
-      { title: "Lễ cưới", time: "09:00", date: "Thứ Bảy - Chủ Nhật | 28–29.11.2026", place: "Tư gia", address: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang" }
+      { title: "Thời gian tổ chức", time: "09:00", date: "Thứ Bảy - Chủ Nhật | 28–29.11.2026", place: "Tư gia", address: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang" }
     ]
   },
   "bao-tran-dai-phat": {
@@ -384,7 +384,7 @@ function setupOpenInvite() {
       document.body.classList.add("invite-opened");
       curtain.classList.add("is-open");
       window.scrollTo(0, 0);
-    }, 2900);
+    }, 2200);
   });
 }
 
