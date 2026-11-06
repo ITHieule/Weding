@@ -3591,6 +3591,10 @@ body.invite-opened .hero-card {
   outline: none;
 }
 
+.opening-flourish {
+  z-index: 3;
+}
+
 .opening-curtain {
   border: 0;
   box-shadow: none;
@@ -3782,4 +3786,31 @@ body.invite-opened .sample-cover__content {
 
 @media (prefers-reduced-motion: reduce) {
   .gift-pouch__art { animation: none; }
+}
+
+@media (max-width: 900px) {
+  .thanks {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .thanks__frame {
+    width: 100vw;
+    max-width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .thanks__media {
+    inset: 0;
+    padding: 0;
+  }
+
+  .thanks__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+  }
 }
