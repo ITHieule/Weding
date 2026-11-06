@@ -380,11 +380,13 @@ function setupOpenInvite() {
       playMusic();
     }
 
-    const openingDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 550 : 1900;
+    const openingDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 550 : 1850;
     window.setTimeout(() => {
       document.body.classList.remove("invite-locked", "invite-opening-out");
       document.body.classList.add("invite-opened");
       curtain.classList.add("is-open");
+      curtain.setAttribute("aria-hidden", "true");
+      curtain.hidden = true;
       window.scrollTo(0, 0);
     }, openingDuration);
   });
