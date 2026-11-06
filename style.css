@@ -4386,3 +4386,125 @@ body.invite-opened .sample-cover__content {
     transition-duration: 450ms;
   }
 }
+
+/* A single, synchronized opening sequence: smooth wings, visible white cloud, then reveal. */
+.opening-curtain {
+  background: linear-gradient(145deg, #254c39, #173a2b 52%, #102d21);
+}
+
+.opening-curtain::after {
+  display: none;
+  transition: none;
+}
+
+.opening-card-wing {
+  transition: transform 1500ms cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+.opening-curtain.is-opening .opening-card-wing--left {
+  transform: translate3d(-112%, 0, 0) !important;
+}
+
+.opening-curtain.is-opening .opening-card-wing--right {
+  transform: translate3d(112%, 0, 0) !important;
+}
+
+.opening-mist {
+  inset: -8%;
+  opacity: 0;
+  transform: none;
+  background:
+    radial-gradient(ellipse 54% 42% at 14% 23%, rgba(255, 255, 249, 0.62), transparent 100%),
+    radial-gradient(ellipse 54% 46% at 76% 27%, rgba(255, 255, 249, 0.58), transparent 100%),
+    radial-gradient(ellipse 56% 42% at 32% 73%, rgba(250, 252, 242, 0.58), transparent 100%),
+    radial-gradient(ellipse 52% 46% at 90% 74%, rgba(255, 255, 249, 0.55), transparent 100%),
+    radial-gradient(ellipse 45% 48% at 52% 50%, rgba(255, 255, 249, 0.42), transparent 100%);
+  mix-blend-mode: normal;
+  will-change: opacity;
+}
+
+.opening-mist::before,
+.opening-mist::after {
+  filter: none;
+}
+
+.opening-mist::before {
+  background:
+    radial-gradient(ellipse 48% 40% at 30% 30%, rgba(255, 255, 252, 0.56), transparent 100%),
+    radial-gradient(ellipse 52% 44% at 88% 45%, rgba(255, 255, 252, 0.54), transparent 100%),
+    radial-gradient(ellipse 50% 42% at 15% 78%, rgba(250, 252, 244, 0.5), transparent 100%);
+}
+
+.opening-mist::after {
+  background:
+    radial-gradient(ellipse 48% 42% at 82% 17%, rgba(255, 255, 252, 0.52), transparent 100%),
+    radial-gradient(ellipse 54% 42% at 45% 56%, rgba(255, 255, 252, 0.48), transparent 100%),
+    radial-gradient(ellipse 48% 42% at 62% 84%, rgba(250, 252, 244, 0.5), transparent 100%);
+}
+
+.opening-curtain.is-opening .opening-mist {
+  animation: opening-cloud-reveal 2200ms cubic-bezier(0.32, 0, 0.2, 1) both;
+}
+
+.opening-curtain.is-opening .opening-mist::before {
+  animation: opening-cloud-layer 2200ms cubic-bezier(0.32, 0, 0.2, 1) both;
+}
+
+.opening-curtain.is-opening .opening-mist::after {
+  animation: opening-cloud-layer 2200ms cubic-bezier(0.32, 0, 0.2, 1) 80ms both;
+}
+
+@keyframes opening-cloud-reveal {
+  0% { opacity: 0; }
+  22% { opacity: 0.92; }
+  52% { opacity: 0.92; }
+  78% { opacity: 0.68; }
+  100% { opacity: 0; }
+}
+
+@keyframes opening-cloud-layer {
+  0% { opacity: 0; }
+  24% { opacity: 0.78; }
+  55% { opacity: 0.78; }
+  82% { opacity: 0.42; }
+  100% { opacity: 0; }
+}
+
+body.invite-opening-out .sample-cover,
+body.invite-opened .sample-cover {
+  animation: invitation-content-emerge 1050ms 1150ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+body.invite-opening-out .sample-cover__content,
+body.invite-opened .sample-cover__content {
+  animation: invitation-text-emerge 950ms 1320ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .opening-mist,
+  .opening-mist::before,
+  .opening-mist::after {
+    filter: none !important;
+    mix-blend-mode: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-curtain.is-opening .opening-mist,
+  .opening-curtain.is-opening .opening-mist::before,
+  .opening-curtain.is-opening .opening-mist::after {
+    animation-duration: 500ms;
+    animation-delay: 0ms;
+  }
+
+  body.invite-opening-out .sample-cover,
+  body.invite-opened .sample-cover,
+  body.invite-opening-out .sample-cover__content,
+  body.invite-opened .sample-cover__content {
+    animation-duration: 450ms;
+    animation-delay: 0ms;
+  }
+}
