@@ -2979,6 +2979,7 @@ body {
 
 .opening-curtain.is-open {
   visibility: hidden;
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -3609,6 +3610,12 @@ body {
   }
 }
 
+.opening-curtain.is-open {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Readable glass panel for the closing thank-you message over the photo. */
 .thanks__content {
   align-self: end;
@@ -4077,16 +4084,11 @@ body.invite-opened .hero-card {
   pointer-events: none;
   transform: scale(0.78);
   background:
-    radial-gradient(ellipse 38% 42% at 16% 18%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
-    radial-gradient(ellipse 38% 42% at 50% 18%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
-    radial-gradient(ellipse 38% 42% at 84% 18%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
-    radial-gradient(ellipse 38% 42% at 16% 50%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
-    radial-gradient(ellipse 38% 42% at 50% 50%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
-    radial-gradient(ellipse 38% 42% at 84% 50%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
-    radial-gradient(ellipse 38% 42% at 16% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
-    radial-gradient(ellipse 38% 42% at 50% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%),
-    radial-gradient(ellipse 38% 42% at 84% 82%, rgba(245, 247, 232, 0.48) 0, rgba(235, 243, 228, 0.22) 54%, transparent 100%);
-  mix-blend-mode: screen;
+    radial-gradient(ellipse 44% 40% at 18% 22%, rgba(245, 247, 232, 0.32), transparent 100%),
+    radial-gradient(ellipse 50% 46% at 78% 30%, rgba(245, 247, 232, 0.3), transparent 100%),
+    radial-gradient(ellipse 50% 42% at 30% 70%, rgba(235, 243, 228, 0.28), transparent 100%),
+    radial-gradient(ellipse 46% 44% at 82% 76%, rgba(245, 247, 232, 0.28), transparent 100%);
+  mix-blend-mode: normal;
 }
 
 .opening-cloud-filter {
@@ -4102,43 +4104,38 @@ body.invite-opened .hero-card {
   inset: 0;
   border-radius: 0;
   content: "";
-  filter: blur(9px);
+  filter: blur(5px);
 }
 
 .opening-mist::before {
   background:
-    radial-gradient(ellipse 34% 36% at 8% 34%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 42% 34%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 76% 34%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 24% 68%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 58% 68%, rgba(255, 255, 248, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 92% 68%, rgba(255, 255, 248, 0.38) 0, transparent 100%);
+    radial-gradient(ellipse 44% 42% at 15% 36%, rgba(255, 255, 248, 0.25), transparent 100%),
+    radial-gradient(ellipse 46% 44% at 76% 34%, rgba(255, 255, 248, 0.24), transparent 100%),
+    radial-gradient(ellipse 44% 42% at 32% 72%, rgba(255, 255, 248, 0.22), transparent 100%),
+    radial-gradient(ellipse 42% 42% at 86% 76%, rgba(255, 255, 248, 0.22), transparent 100%);
   opacity: 0;
 }
 
 .opening-mist::after {
   background:
-    radial-gradient(ellipse 34% 36% at 24% 32%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 58% 32%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 92% 32%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 8% 66%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 42% 66%, rgba(243, 248, 232, 0.38) 0, transparent 100%),
-    radial-gradient(ellipse 34% 36% at 76% 66%, rgba(243, 248, 232, 0.38) 0, transparent 100%);
+    radial-gradient(ellipse 46% 42% at 83% 18%, rgba(243, 248, 232, 0.23), transparent 100%),
+    radial-gradient(ellipse 42% 42% at 20% 56%, rgba(243, 248, 232, 0.23), transparent 100%),
+    radial-gradient(ellipse 48% 42% at 70% 68%, rgba(243, 248, 232, 0.22), transparent 100%);
   opacity: 0;
 }
 
 .opening-curtain.is-opening .opening-mist {
-  animation: opening-mist-drift 2200ms ease-out both;
+  animation: opening-mist-drift 1500ms ease-out both;
   will-change: opacity, transform;
 }
 
 .opening-curtain.is-opening .opening-mist::before {
-  animation: opening-mist-layer-opacity 2200ms 0ms ease-out both;
+  animation: opening-mist-layer-opacity 1500ms 0ms ease-out both;
   will-change: opacity;
 }
 
 .opening-curtain.is-opening .opening-mist::after {
-  animation: opening-mist-layer-opacity 2200ms 0ms ease-out both;
+  animation: opening-mist-layer-opacity 1500ms 0ms ease-out both;
   will-change: opacity;
 }
 
@@ -4150,24 +4147,24 @@ body.invite-opened .hero-card {
 
   .opening-mist::before,
   .opening-mist::after {
-    filter: blur(7px);
+    filter: blur(4px);
   }
 }
 
 @keyframes opening-mist-layer-opacity {
-  0% { opacity: 0.18; }
-  18% { opacity: 1; }
-  48% { opacity: 1; }
-  76% { opacity: 0.9; }
+  0% { opacity: 0; }
+  20% { opacity: 0.62; }
+  46% { opacity: 0.62; }
+  76% { opacity: 0.34; }
   100% { opacity: 0; }
 }
 
 @keyframes opening-mist-drift {
-  0% { opacity: 0.18; transform: scale(0.78); }
-  18% { opacity: 1; }
-  48% { opacity: 1; transform: scale(1); }
-  76% { opacity: 0.9; transform: scale(1.06); }
-  100% { opacity: 0; transform: scale(1.12); }
+  0% { opacity: 0; transform: scale(0.9); }
+  20% { opacity: 0.76; }
+  46% { opacity: 0.76; transform: scale(1); }
+  76% { opacity: 0.4; transform: scale(1.04); }
+  100% { opacity: 0; transform: scale(1.08); }
 }
 
 @keyframes opening-mist-left {
@@ -4186,22 +4183,22 @@ body.invite-opened .hero-card {
 
 body.invite-opening-out .sample-cover,
 body.invite-opened .sample-cover {
-  animation: invitation-content-emerge 1900ms 1900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: invitation-content-emerge 1700ms 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 body.invite-opening-out .sample-cover__content,
 body.invite-opened .sample-cover__content {
-  animation: invitation-text-emerge 1750ms 2350ms ease-out both;
+  animation: invitation-text-emerge 1500ms 850ms ease-out both;
 }
 
 @keyframes invitation-content-emerge {
-  from { opacity: 0.35; filter: blur(12px); transform: scale(1.045); }
-  to { opacity: 1; filter: blur(0); transform: scale(1); }
+  from { opacity: 0.35; transform: scale(1.025); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes invitation-text-emerge {
-  from { opacity: 0; transform: translateY(16px); filter: blur(7px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
