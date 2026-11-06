@@ -2108,6 +2108,317 @@ body.invite-opened .hero-card {
   }
 }
 
+.form-thanks-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 160;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.form-thanks-modal[hidden] {
+  display: none;
+}
+
+.form-thanks-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgba(16, 38, 28, 0.64);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.form-thanks-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 410px);
+  padding: 34px 26px 26px;
+  border: 1px solid rgba(185, 166, 125, 0.42);
+  border-radius: 18px;
+  background: linear-gradient(150deg, #fffefa, #f3f6f0);
+  box-shadow: 0 26px 76px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  text-align: center;
+  transform: translateY(18px) scale(0.97);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.form-thanks-modal.is-visible .form-thanks-modal__backdrop {
+  opacity: 1;
+}
+
+.form-thanks-modal.is-visible .form-thanks-modal__panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.form-thanks-modal__close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.form-thanks-modal__heart {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 14px;
+  place-items: center;
+  border: 1px solid rgba(185, 166, 125, 0.56);
+  border-radius: 50%;
+  color: var(--rose-deep);
+  background: rgba(220, 232, 223, 0.65);
+  font-size: 2rem;
+}
+
+.form-thanks-modal__panel .eyebrow {
+  margin-bottom: 2px;
+  color: var(--sage);
+}
+
+.form-thanks-modal__panel h2 {
+  margin: 0 0 10px;
+  color: var(--rose-deep);
+  font-family: var(--wedding);
+  font-size: clamp(2.4rem, 9vw, 3.2rem);
+  font-weight: 400;
+}
+
+.form-thanks-modal__message {
+  max-width: 320px;
+  margin: 0 auto 22px;
+  color: var(--ink);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.form-thanks-modal__panel .button {
+  min-width: 150px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-thanks-modal__backdrop,
+  .form-thanks-modal__panel {
+    transition: none;
+  }
+}
+
+.schedule-card__intro {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  width: min(100%, 430px);
+  margin: 12px auto 20px;
+  padding: 20px clamp(14px, 4vw, 24px);
+  border: 1px solid rgba(29, 73, 57, 0.13);
+  border-radius: 14px;
+  color: var(--muted);
+  background: linear-gradient(145deg, rgba(237, 243, 238, 0.96), rgba(255, 255, 255, 0.94));
+  box-shadow: 0 8px 24px rgba(29, 73, 57, 0.06);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.schedule-card__intro-lead {
+  max-width: 290px;
+  margin-bottom: 4px;
+  text-wrap: balance;
+}
+
+.schedule-card__intro-person {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  max-width: 100%;
+}
+
+.schedule-card__intro-person small {
+  color: var(--sage);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.schedule-card__intro-person strong {
+  color: var(--rose-deep);
+  font-family: var(--wedding);
+  font-size: clamp(1.8rem, 7.2vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.schedule-card__intro-connector {
+  color: var(--champagne);
+  font-family: var(--wedding);
+  font-size: 1.45rem;
+  line-height: 0.9;
+}
+
+@media (max-width: 560px) {
+  .schedule-card__intro {
+    gap: 6px;
+    padding: 18px 13px;
+    font-size: 0.86rem;
+  }
+
+  .schedule-card__intro-person strong {
+    font-size: clamp(1.75rem, 7.8vw, 2.2rem);
+  }
+}
+
+.schedule-card .save-date-calendar {
+  width: min(100%, 350px);
+  gap: 3px;
+  margin: 10px auto 20px;
+  padding: 12px 10px;
+  border: 1px solid rgba(29, 73, 57, 0.12);
+  border-radius: 12px;
+  background: rgba(237, 243, 238, 0.66);
+}
+
+.schedule-card .save-date-calendar span {
+  min-height: 30px;
+  border-radius: 50%;
+  font-size: 0.78rem;
+}
+
+.schedule-card .save-date-calendar .save-date__month {
+  grid-column: 1 / -1;
+  min-height: 26px;
+  border-radius: 0;
+  color: var(--rose-deep);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.schedule-card .save-date-calendar .save-date__weekday {
+  min-height: 28px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.68rem;
+}
+
+.schedule-card .save-date-calendar .is-wedding-day {
+  color: #fff;
+  background: var(--rose-deep);
+  box-shadow: 0 3px 8px rgba(29, 73, 57, 0.2);
+  font-weight: 800;
+}
+
+.schedule-card__day-block.is-range > span {
+  max-width: 112px;
+  font-size: clamp(0.68rem, 2.5vw, 0.88rem);
+  text-wrap: balance;
+}
+
+.schedule-card__day-block.is-range > strong {
+  font-size: clamp(1.7rem, 7vw, 2.55rem);
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.schedule-card__ceremony-grid {
+  grid-template-columns: minmax(82px, 0.72fr) minmax(0, 1.78fr);
+  gap: 4px;
+  width: min(100%, 390px);
+  margin: 0 auto 14px;
+  padding: 7px 10px;
+  border: 1px solid rgba(29, 73, 57, 0.13);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(237, 243, 238, 0.88), rgba(255, 255, 255, 0.96));
+}
+
+.schedule-card__ceremony-grid > div {
+  min-height: 96px;
+  padding: 8px 10px;
+}
+
+.schedule-card__time-block {
+  gap: 4px;
+  border: 0;
+  color: var(--rose-deep);
+  text-align: center;
+}
+
+.schedule-card__time-block strong {
+  color: var(--rose-deep);
+  font-family: var(--sans);
+  font-size: clamp(1.2rem, 5vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.schedule-card__time-block span {
+  color: var(--muted);
+  font-size: 0.63rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.schedule-card__day-block {
+  gap: 2px;
+  border: 0;
+  border-left: 1px solid rgba(29, 73, 57, 0.16);
+  text-align: center;
+}
+
+.schedule-card__day-block > span,
+.schedule-card__day-block > em {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.schedule-card__day-block > strong {
+  color: var(--rose-deep);
+  font-family: var(--sans);
+  font-size: clamp(2rem, 8.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.schedule-card__day-block.is-range > span {
+  max-width: none;
+  white-space: nowrap;
+  font-size: clamp(0.66rem, 2.35vw, 0.82rem);
+}
+
+.schedule-card__day-block.is-range > strong {
+  font-size: clamp(1.9rem, 8vw, 2.65rem);
+}
+
+@media (max-width: 360px) {
+  .schedule-card__ceremony-grid {
+    grid-template-columns: minmax(76px, 0.68fr) minmax(0, 1.82fr);
+    padding-inline: 6px;
+  }
+
+  .schedule-card__day-block.is-range > span {
+    font-size: 0.63rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
@@ -3295,6 +3606,39 @@ body {
 
   .opening-card-hint {
     bottom: max(10px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Readable glass panel for the closing thank-you message over the photo. */
+.thanks__content {
+  align-self: end;
+  width: min(760px, calc(100% - 32px));
+  margin-bottom: max(28px, calc(4svh + env(safe-area-inset-bottom)));
+  padding: clamp(22px, 5vw, 42px);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(20, 55, 40, 0.78), rgba(20, 55, 40, 0.6));
+  box-shadow: 0 18px 54px rgba(8, 25, 17, 0.24);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.thanks__content h2 {
+  font-size: clamp(1.9rem, 6.2vw, 4.4rem);
+  line-height: 1.15;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 560px) {
+  .thanks__content {
+    width: calc(100% - 36px);
+    margin-bottom: max(24px, calc(3svh + env(safe-area-inset-bottom)));
+    padding: 24px 19px;
+    border-radius: 16px;
+  }
+
+  .thanks__content h2 {
+    font-size: clamp(1.8rem, 7.2vw, 2.5rem);
   }
 }
 

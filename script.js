@@ -3,9 +3,10 @@ const CARD_CONFIGS = {
   default: {
     brideName: "Huỳnh Lê Hoài Ngọc",
     groomName: "Phan Hiếu Lễ",
-    weddingDate: "29/11/2026",
-    weddingDisplayDate: "Chủ Nhật | 29.11.2026",
-    lunarDate: "Nhằm ngày 21 tháng 10 năm Bính Ngọ",
+    weddingDate: "28/11/2026",
+    weddingEndDate: "29/11/2026",
+    weddingDisplayDate: "Thứ Bảy - Chủ Nhật | 28–29.11.2026",
+    lunarDate: "Nhằm ngày 20–21 tháng 10 năm Bính Ngọ",
     partyTime: "09:00",
     venueName: "Tư gia",
     weddingAddress: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang",
@@ -26,11 +27,11 @@ const CARD_CONFIGS = {
     story: [
       { icon: "✦", title: "Ngày gặp nhau", date: "Một ngày thật đẹp", text: "Từ những điều giản dị, hai gia đình cùng chứng kiến một hành trình yêu thương lớn dần." },
       { icon: "♡", title: "Ngày yêu nhau", date: "Những tháng ngày thương mến", text: "Tình yêu được vun đắp bằng sự chân thành, tin tưởng và những lời hẹn bình yên." },
-      { icon: "◇", title: "Ngày báo tin", date: "29.11.2026", text: "Gia đình hai bên trân trọng báo tin lễ cưới của Huỳnh Lê Hoài Ngọc và Phan Hiếu Lễ." },
-      { icon: "∞", title: "Ngày chung vui", date: "Chủ Nhật | 29.11.2026", text: "Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi." }
+      { icon: "◇", title: "Ngày báo tin", date: "28–29.11.2026", text: "Gia đình hai bên trân trọng báo tin lễ cưới của Huỳnh Lê Hoài Ngọc và Phan Hiếu Lễ." },
+      { icon: "∞", title: "Ngày chung vui", date: "Thứ Bảy - Chủ Nhật | 28–29.11.2026", text: "Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi." }
     ],
     schedule: [
-      { title: "Lễ cưới", time: "09:00", date: "Chủ Nhật | 29.11.2026", place: "Tư gia", address: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang" }
+      { title: "Lễ cưới", time: "09:00", date: "Thứ Bảy - Chủ Nhật | 28–29.11.2026", place: "Tư gia", address: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang" }
     ]
   },
   "bao-tran-dai-phat": {
@@ -147,10 +148,10 @@ function renderDatePieces() {
     element.textContent = `Tháng ${weddingDate.getMonth() + 1} - ${year}`;
   });
 
-  renderSaveDateCalendar(weddingDate);
+  renderSaveDateCalendar(weddingDate, parseVietnameseDate(state.config.weddingEndDate || state.config.weddingDate) || weddingDate);
 }
 
-function renderSaveDateCalendar(weddingDate) {
+function renderSaveDateCalendar(weddingDate, weddingEndDate = weddingDate) {
   const calendar = document.getElementById("saveDateCalendar");
   if (!calendar) return;
 
@@ -160,15 +161,17 @@ function renderSaveDateCalendar(weddingDate) {
   const firstDay = new Date(year, month, 1);
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const leadingBlank = (firstDay.getDay() + 6) % 7;
-  const cells = [];
+  const cells = [`<span class="save-date__month">Tháng ${month + 1} năm ${year}</span>`];
 
   labels.forEach((label) => cells.push(`<span class="save-date__weekday">${label}</span>`));
   for (let index = 0; index < leadingBlank; index += 1) {
     cells.push("<span></span>");
   }
   for (let day = 1; day <= daysInMonth; day += 1) {
-    const isWeddingDay = day === weddingDate.getDate();
-    cells.push(`<span class="${isWeddingDay ? "is-wedding-day" : ""}">${day}</span>`);
+    const currentDate = new Date(year, month, day);
+    const isWeddingDay = currentDate >= new Date(weddingDate.getFullYear(), weddingDate.getMonth(), weddingDate.getDate())
+      && currentDate <= new Date(weddingEndDate.getFullYear(), weddingEndDate.getMonth(), weddingEndDate.getDate());
+    cells.push(`<span class="${isWeddingDay ? "is-wedding-day" : ""}"${isWeddingDay ? ' aria-label="Ngày cưới"' : ""}>${day}</span>`);
   }
 
   calendar.innerHTML = cells.join("");
@@ -205,10 +208,19 @@ function withAssetVersion(src) {
 function renderSchedule() {
   const schedule = document.getElementById("scheduleGrid");
   const weddingDate = parseVietnameseDate(state.config.weddingDate);
+  const weddingEndDate = parseVietnameseDate(state.config.weddingEndDate || state.config.weddingDate);
   const weekday = weddingDate ? ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"][weddingDate.getDay()] : "";
+  const endWeekday = weddingEndDate ? ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"][weddingEndDate.getDay()] : "";
   const day = weddingDate ? String(weddingDate.getDate()).padStart(2, "0") : "11";
+  const endDay = weddingEndDate ? String(weddingEndDate.getDate()).padStart(2, "0") : day;
   const month = weddingDate ? String(weddingDate.getMonth() + 1).padStart(2, "0") : "06";
+  const endMonth = weddingEndDate ? String(weddingEndDate.getMonth() + 1).padStart(2, "0") : month;
   const year = weddingDate ? String(weddingDate.getFullYear()) : "2026";
+  const endYear = weddingEndDate ? String(weddingEndDate.getFullYear()) : year;
+  const weekdayLabel = weekday === endWeekday ? weekday : `${weekday} - ${endWeekday}`;
+  const dayLabel = day === endDay ? day : `${day}–${endDay}`;
+  const monthLabel = month === endMonth ? `Tháng ${month}` : `Tháng ${month}–${endMonth}`;
+  const yearLabel = year === endYear ? `Năm ${year}` : `Năm ${year}–${endYear}`;
   schedule.innerHTML = state.config.schedule.map((item) => `
     <article class="schedule-card reveal">
       <div class="schedule-card__event">
@@ -216,20 +228,20 @@ function renderSchedule() {
         <p>Vào lúc</p>
       </div>
       <div class="schedule-card__ceremony-grid" aria-label="Thời gian lễ vu quy">
-        <div class="schedule-card__time-block">${item.time}</div>
-        <div class="schedule-card__day-block">
-          <span>${weekday}</span>
-          <strong>${day}</strong>
-          <em>Tháng ${month}</em>
+        <div class="schedule-card__time-block"><strong>${item.time}</strong><span>Giờ bắt đầu</span></div>
+        <div class="schedule-card__day-block ${day === endDay ? "" : "is-range"}">
+          <span>${weekdayLabel}</span>
+          <strong>${dayLabel}</strong>
+          <em>${monthLabel} · ${yearLabel.replace("Năm ", "")}</em>
         </div>
-        <div class="schedule-card__year-block">Năm ${year}</div>
       </div>
       <p class="schedule-card__lunar">(${state.config.lunarDate})</p>
       <p class="schedule-card__venue-line">Tại ${item.place}</p>
       <p class="schedule-card__intro">
-        <span class="schedule-card__intro-line">Kính mời quý vị đến chung vui</span>
-        <span class="schedule-card__intro-line">trong ngày hạnh phúc của</span>
-        <span class="schedule-card__intro-tail">chú rể <strong>${state.config.groomName}</strong><br>và cô dâu <strong>${state.config.brideName}</strong>.</span>
+        <span class="schedule-card__intro-lead">Kính mời quý vị đến chung vui trong ngày hạnh phúc của</span>
+        <span class="schedule-card__intro-person"><small>Chú rể</small><strong>${state.config.groomName}</strong></span>
+        <span class="schedule-card__intro-connector" aria-hidden="true">&amp;</span>
+        <span class="schedule-card__intro-person"><small>Cô dâu</small><strong>${state.config.brideName}</strong></span>
       </p>
       <div class="countdown countdown--compact" id="countdownTimer" aria-live="polite">
         <div class="countdown__item"><strong data-unit="days">00</strong><span>Ngày</span></div>
@@ -238,6 +250,7 @@ function renderSchedule() {
         <div class="countdown__item"><strong data-unit="seconds">00</strong><span>Giây</span></div>
       </div>
       <p class="countdown__done" id="countdownDone">Ngày hạnh phúc đã đến</p>
+      <div class="save-date-calendar" id="saveDateCalendar" role="group" aria-label="Lịch tháng có đánh dấu ngày cưới"></div>
       <div class="schedule-card__place">
         <strong>Địa điểm tổ chức</strong>
         <p>${item.address || item.place}</p>
@@ -449,6 +462,41 @@ function setupMap() {
 
 function setupGuestForms() {
   loadWishList();
+  const thanksModal = document.getElementById("formThanksModal");
+  const thanksMessage = document.getElementById("formThanksMessage");
+  const thanksClose = document.getElementById("closeFormThanks");
+  const thanksDone = document.getElementById("formThanksDone");
+  const thanksBackdrop = document.getElementById("formThanksBackdrop");
+  let previousFocus = null;
+
+  const closeThanks = () => {
+    if (!thanksModal || thanksModal.hidden) return;
+    thanksModal.classList.remove("is-visible");
+    document.body.classList.remove("no-scroll");
+    window.setTimeout(() => {
+      if (!thanksModal.classList.contains("is-visible")) thanksModal.hidden = true;
+    }, 240);
+    previousFocus?.focus();
+  };
+
+  const showThanks = (message) => {
+    if (!thanksModal || !thanksMessage) return false;
+    previousFocus = document.activeElement;
+    thanksMessage.textContent = message;
+    thanksModal.hidden = false;
+    document.body.classList.add("no-scroll");
+    requestAnimationFrame(() => thanksModal.classList.add("is-visible"));
+    thanksClose?.focus();
+    return true;
+  };
+
+  thanksClose?.addEventListener("click", closeThanks);
+  thanksDone?.addEventListener("click", closeThanks);
+  thanksBackdrop?.addEventListener("click", closeThanks);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeThanks();
+  });
+
   const forms = [
     [document.getElementById("wishForm"), document.getElementById("wishStatus"), "wish"],
     [document.getElementById("rsvpForm"), document.getElementById("rsvpStatus"), "rsvp"]
@@ -469,11 +517,13 @@ function setupGuestForms() {
         submitButton.disabled = true;
         submitButton.textContent = "Đang gửi…";
       }
+      status.hidden = false;
       status.textContent = "Đang gửi đến gia đình…";
 
       const payload = new URLSearchParams();
       payload.set("type", type);
       new FormData(form).forEach((value, key) => payload.set(key, String(value)));
+      const attendance = payload.get("attendance");
 
       try {
         await fetch(FORM_ENDPOINT, {
@@ -481,7 +531,18 @@ function setupGuestForms() {
           mode: "no-cors",
           body: payload
         });
-        status.textContent = "Đã gửi yêu cầu. Cảm ơn bạn đã chia sẻ!";
+        const thankYou = type === "wish"
+          ? "Cảm ơn bạn đã gửi lời chúc thân thương. Chúng mình rất trân quý tình cảm của bạn!"
+          : attendance === "yes"
+            ? "Cảm ơn bạn đã xác nhận tham dự. Chúng mình mong được đón bạn trong ngày vui!"
+            : "Cảm ơn bạn đã phản hồi. Chúng mình trân trọng tình cảm của bạn!";
+        if (showThanks(thankYou)) {
+          status.textContent = "";
+          status.hidden = true;
+        } else {
+          status.hidden = false;
+          status.textContent = thankYou;
+        }
         form.reset();
         if (type === "wish") loadWishList();
       } catch (error) {

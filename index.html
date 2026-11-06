@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Thiệp cưới Phan Hiếu Lễ và Huỳnh Lê Hoài Ngọc, ngày 29.11.2026.">
+  <meta name="description" content="Thiệp cưới Phan Hiếu Lễ và Huỳnh Lê Hoài Ngọc, ngày 28–29.11.2026.">
   <title>Phan Hiếu Lễ & Huỳnh Lê Hoài Ngọc | Thiệp cưới</title>
   <link rel="icon" href="favicon.ico">
   <link rel="preload" as="image" href="assets/card-wings.png?v=20261105-04" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261106-06">
+  <link rel="stylesheet" href="style.css?v=20261106-14">
 </head>
 <body class="invite-locked">
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -218,6 +218,18 @@
       </div>
     </section>
 
+    <div class="form-thanks-modal" id="formThanksModal" hidden>
+      <button class="form-thanks-modal__backdrop" id="formThanksBackdrop" type="button" aria-label="Đóng thông báo"></button>
+      <section class="form-thanks-modal__panel" role="dialog" aria-modal="true" aria-labelledby="formThanksTitle" aria-describedby="formThanksMessage">
+        <button class="form-thanks-modal__close" id="closeFormThanks" type="button" aria-label="Đóng">×</button>
+        <span class="form-thanks-modal__heart" aria-hidden="true">♡</span>
+        <p class="eyebrow">With love</p>
+        <h2 id="formThanksTitle">Cảm ơn bạn</h2>
+        <p class="form-thanks-modal__message" id="formThanksMessage"></p>
+        <button class="button button--primary" id="formThanksDone" type="button">Đóng</button>
+      </section>
+    </div>
+
     <section class="thanks" id="thanks">
       <div class="section__inner thanks__frame reveal">
         <div class="thanks__media" aria-hidden="true">
@@ -225,9 +237,8 @@
         </div>
         <div class="thanks__content">
           <p class="eyebrow">Thank you</p>
-          <h2>Cảm ơn quý vị đã dành thời gian chung vui cùng gia đình chúng tôi.</h2>
+          <h2>Cảm ơn bạn đã dành tình cảm cho chúng mình! Sự hiện diện của bạn chính là món quà ý nghĩa nhất, và chúng mình vô cùng trân quý khi được cùng bạn chia sẻ niềm hạnh phúc trong ngày trọng đại này.</h2>
           <p><span data-field="groomName">[Tên Chú Rể]</span> & <span data-field="brideName">[Tên Cô Dâu]</span></p>
-          <p data-field="weddingDisplayDate">[DD/MM/YYYY]</p>
         </div>
       </div>
     </section>
@@ -242,6 +253,6 @@
     <img id="lightboxImage" alt="Ảnh cưới phóng to">
   </div>
 
-  <script src="script.js?v=20261106-04"></script>
+  <script src="script.js?v=20261106-11"></script>
 </body>
 </html>
