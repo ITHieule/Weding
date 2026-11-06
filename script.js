@@ -40,6 +40,8 @@ const CARD_CONFIGS = {
 };
 
 const ASSET_VERSION = "20260512-03";
+// Paste the deployed Google Apps Script Web App URL here (ending in /exec).
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwPNPvH48aJYrLoBhkcOie_mXpknEU7w6ZeaCQP7sLrgtqq_HBAn01-taPaJorzwwg/exec";
 
 const state = {
   config: mergeConfig(getCurrentConfig()),
@@ -447,15 +449,47 @@ function setupMap() {
 
 function setupGuestForms() {
   const forms = [
-    [document.getElementById("wishForm"), document.getElementById("wishStatus")],
-    [document.getElementById("rsvpForm"), document.getElementById("rsvpStatus")]
+    [document.getElementById("wishForm"), document.getElementById("wishStatus"), "wish"],
+    [document.getElementById("rsvpForm"), document.getElementById("rsvpStatus"), "rsvp"]
   ];
 
-  forms.forEach(([form, status]) => {
+  forms.forEach(([form, status, type]) => {
     if (!form || !status) return;
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      status.textContent = "Chưa gửi được: thiệp chưa kết nối dịch vụ lưu trực tuyến. Vui lòng nhắn trực tiếp cho gia đình.";
+      if (!FORM_ENDPOINT) {
+        status.textContent = "Biểu mẫu đang chờ kết nối Google Sheet. Gia đình chưa nhận được nội dung này.";
+        return;
+      }
+
+      const submitButton = form.querySelector('[type="submit"]');
+      const originalLabel = submitButton?.textContent;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Đang gửi…";
+      }
+      status.textContent = "Đang gửi đến gia đình…";
+
+      const payload = new URLSearchParams();
+      payload.set("type", type);
+      new FormData(form).forEach((value, key) => payload.set(key, String(value)));
+
+      try {
+        await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          body: payload
+        });
+        status.textContent = "Đã gửi yêu cầu. Cảm ơn bạn đã chia sẻ!";
+        form.reset();
+      } catch (error) {
+        status.textContent = "Gửi chưa thành công. Vui lòng kiểm tra kết nối rồi thử lại.";
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalLabel;
+        }
+      }
     });
   });
 }
