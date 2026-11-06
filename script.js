@@ -500,10 +500,22 @@ function loadWishList() {
   const list = document.getElementById("wishList");
   if (!list || !FORM_ENDPOINT) return;
 
+  const cacheKey = `wedding_wishes_v1_${window.location.pathname}${window.location.search}${window.location.hash}`;
+  let hasCachedWishes = false;
+  try {
+    const cached = JSON.parse(window.localStorage.getItem(cacheKey) || "null");
+    if (Array.isArray(cached) && cached.length) {
+      renderWishList(list, cached);
+      hasCachedWishes = true;
+    }
+  } catch (error) {
+    // Continue with the live request if local storage is unavailable.
+  }
+
   list.setAttribute("aria-busy", "true");
   const callbackName = `weddingWishCallback_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
   const script = document.createElement("script");
-  const timeout = window.setTimeout(() => finishWithMessage("Chưa tải được lời chúc. Vui lòng thử tải lại trang."), 15000);
+  const timeout = window.setTimeout(() => finishWithMessage("Chưa cập nhật được lời chúc mới."), 15000);
 
   const cleanup = () => {
     window.clearTimeout(timeout);
@@ -513,33 +525,24 @@ function loadWishList() {
   const finishWithMessage = (message) => {
     cleanup();
     list.setAttribute("aria-busy", "false");
-    list.replaceChildren(createWishText(message, "guestbook__empty"));
+    if (!hasCachedWishes) list.replaceChildren(createWishText(message, "guestbook__empty"));
   };
 
   window[callbackName] = (result) => {
     cleanup();
     list.setAttribute("aria-busy", "false");
     if (!result || !result.ok || !Array.isArray(result.wishes)) {
-      list.replaceChildren(createWishText("Chưa tải được lời chúc. Vui lòng thử tải lại trang.", "guestbook__empty"));
+      if (!hasCachedWishes) list.replaceChildren(createWishText("Chưa tải được lời chúc. Vui lòng thử tải lại trang.", "guestbook__empty"));
       return;
     }
 
-    if (result.wishes.length === 0) {
-      list.replaceChildren(createWishText("Chưa có lời chúc nào. Hãy gửi lời chúc đầu tiên nhé!", "guestbook__empty"));
-      return;
+    hasCachedWishes = result.wishes.length > 0;
+    try {
+      window.localStorage.setItem(cacheKey, JSON.stringify(result.wishes));
+    } catch (error) {
+      // Rendering still works if the browser blocks local storage.
     }
-
-    const heading = createWishText("Lời chúc từ khách mời", "guestbook__messages-title");
-    const cards = result.wishes.map((wish) => {
-      const card = document.createElement("article");
-      card.className = "guestbook__message";
-      const name = createWishText(wish.name || "Một vị khách", "guestbook__message-name");
-      const message = createWishText(wish.message || "", "guestbook__message-text");
-      card.append(name, message);
-      if (wish.date) card.append(createWishText(wish.date, "guestbook__message-date"));
-      return card;
-    });
-    list.replaceChildren(heading, ...cards);
+    renderWishList(list, result.wishes);
   };
 
   script.onerror = () => finishWithMessage("Chưa tải được lời chúc. Vui lòng thử tải lại trang.");
@@ -549,6 +552,26 @@ function loadWishList() {
   url.searchParams.set("_", String(Date.now()));
   script.src = url.toString();
   document.head.appendChild(script);
+}
+
+function renderWishList(list, wishes) {
+  list.setAttribute("aria-busy", "false");
+  if (!wishes.length) {
+    list.replaceChildren(createWishText("Chưa có lời chúc nào. Hãy gửi lời chúc đầu tiên nhé!", "guestbook__empty"));
+    return;
+  }
+
+  const heading = createWishText("Lời chúc từ khách mời", "guestbook__messages-title");
+  const cards = wishes.map((wish) => {
+    const card = document.createElement("article");
+    card.className = "guestbook__message";
+    const name = createWishText(wish.name || "Một vị khách", "guestbook__message-name");
+    const message = createWishText(wish.message || "", "guestbook__message-text");
+    card.append(name, message);
+    if (wish.date) card.append(createWishText(wish.date, "guestbook__message-date"));
+    return card;
+  });
+  list.replaceChildren(heading, ...cards);
 }
 
 function createWishText(text, className) {

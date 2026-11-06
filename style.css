@@ -3572,21 +3572,47 @@ body.invite-opened .hero-card {
   order: 1;
 }
 
-/* Our Memories follows the dark green, four-photo album in the reference. */
+/* Our Memories uses the same soft sage palette as nearby sections. */
 .gallery {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(113, 147, 111, 0.2), transparent 48%),
-    linear-gradient(155deg, #214936, #153a2a 58%, #102e22);
+    radial-gradient(ellipse at 50% 5%, rgba(185, 166, 125, 0.1), transparent 42%),
+    linear-gradient(180deg, #edf2ec 0%, #f7f8f5 48%, #eef3ee 100%);
 }
 
 .gallery .section-title {
-  color: #f4f1e6;
+  color: var(--rose-deep);
 }
 
 .gallery .eyebrow {
-  color: rgba(231, 226, 206, 0.78);
+  color: var(--sage);
+}
+
+.gallery__stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--champagne);
+  pointer-events: none;
+}
+
+.gallery__stars span {
+  position: absolute;
+  opacity: 0.62;
+  font-size: 15px;
+  line-height: 1;
+  animation: gallery-star-glow 3.8s ease-in-out infinite;
+}
+
+.gallery__stars span:nth-child(1) { top: 14%; left: max(7%, calc(50% - 285px)); }
+.gallery__stars span:nth-child(2) { top: 31%; right: max(8%, calc(50% - 280px)); animation-delay: 0.8s; }
+.gallery__stars span:nth-child(3) { bottom: 19%; left: max(10%, calc(50% - 270px)); animation-delay: 1.5s; }
+.gallery__stars span:nth-child(4) { right: max(9%, calc(50% - 275px)); bottom: 11%; animation-delay: 2.2s; }
+
+@keyframes gallery-star-glow {
+  0%, 100% { opacity: 0.42; transform: scale(0.88) rotate(0deg); }
+  50% { opacity: 0.82; transform: scale(1.08) rotate(12deg); }
 }
 
 .gallery__grid {
@@ -3598,15 +3624,27 @@ body.invite-opened .hero-card {
 
 .gallery__item {
   overflow: hidden;
-  border: 1px solid rgba(241, 237, 219, 0.48);
-  border-radius: 2px;
-  background: rgba(241, 237, 219, 0.08);
-  box-shadow: 0 10px 26px rgba(5, 20, 13, 0.2);
+  border: 1px solid rgba(29, 73, 57, 0.18);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 9px 25px rgba(29, 73, 57, 0.11);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.gallery__item:hover {
+  border-color: rgba(29, 73, 57, 0.34);
+  box-shadow: 0 13px 30px rgba(29, 73, 57, 0.16);
+  transform: translateY(-2px);
 }
 
 .gallery__item img {
   aspect-ratio: 0.82;
   object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__stars span { animation: none; }
+  .gallery__item { transition: none; }
 }
 
 .hero-card {
