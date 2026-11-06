@@ -380,7 +380,7 @@ function setupOpenInvite() {
       playMusic();
     }
 
-    const openingDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 500 : 2300;
+    const openingDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 950 : 2600;
     window.setTimeout(() => {
       document.body.classList.remove("invite-locked", "invite-opening-out");
       document.body.classList.add("invite-opened");
