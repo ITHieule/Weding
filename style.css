@@ -1234,8 +1234,12 @@ body.invite-opened .hero-card {
   border-radius: 8px;
   background: #fffdf8;
   box-shadow: 0 24px 68px rgba(96, 62, 52, 0.14);
+  cursor: zoom-in;
 }
-
+.family-photo:focus-visible {
+  outline: 2px solid var(--rose-deep, #6b7f62);
+  outline-offset: 3px;
+}
 .family-photo::before {
   content: "";
   position: absolute;
@@ -1633,6 +1637,8 @@ body.invite-opened .hero-card {
   overflow: hidden;
   background: transparent;
   cursor: zoom-in;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gallery__item img {
@@ -1791,7 +1797,7 @@ body.invite-opened .hero-card {
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 1000;
   display: grid;
   place-items: center;
   padding: 18px;
@@ -1807,7 +1813,12 @@ body.invite-opened .hero-card {
 }
 
 .lightbox img {
-  max-height: 86vh;
+  width: auto;
+  height: auto;
+  max-width: min(94vw, 1100px);
+  max-height: 90vh;
+  max-height: 90dvh;
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
 }

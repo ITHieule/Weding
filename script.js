@@ -198,8 +198,17 @@ function renderGallery() {
       <img src="${withAssetVersion(src)}" alt="Ảnh cưới ${index + 1}">
     </button>
   `).join("");
+  gallery.querySelectorAll(".gallery__item").forEach((button) => {
+    button.addEventListener("click", () => openGalleryImage(button.dataset.full));
+  });
 }
 
+function openGalleryImage(src) {
+  selectors.lightboxImage.src = src;
+  selectors.lightbox.classList.add("is-open");
+  selectors.lightbox.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+}
 function withAssetVersion(src) {
   const separator = src.includes("?") ? "&" : "?";
   return `${src}${separator}v=${ASSET_VERSION}`;
@@ -425,15 +434,6 @@ function setupScrollProgress() {
 }
 
 function setupLightbox() {
-  document.getElementById("galleryGrid").addEventListener("click", (event) => {
-    const button = event.target.closest(".gallery__item");
-    if (!button) return;
-    selectors.lightboxImage.src = button.dataset.full;
-    selectors.lightbox.classList.add("is-open");
-    selectors.lightbox.setAttribute("aria-hidden", "false");
-    document.body.classList.add("no-scroll");
-  });
-
   selectors.closeLightbox.addEventListener("click", closeLightbox);
   selectors.lightbox.addEventListener("click", (event) => {
     if (event.target === selectors.lightbox) closeLightbox();
@@ -441,8 +441,24 @@ function setupLightbox() {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeLightbox();
   });
-}
 
+  // Bấm vào ảnh chú rể / cô dâu để phóng to
+  document.querySelectorAll(".family-photo").forEach((figure) => {
+    const img = figure.querySelector("img");
+    if (!img) return;
+    figure.setAttribute("role", "button");
+    figure.setAttribute("tabindex", "0");
+    figure.setAttribute("aria-label", "Phóng to " + (img.alt || "ảnh"));
+    const open = () => openGalleryImage(img.currentSrc || img.src);
+    figure.addEventListener("click", open);
+    figure.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        open();
+      }
+    });
+  });
+}
 function closeLightbox() {
   selectors.lightbox.classList.remove("is-open");
   selectors.lightbox.setAttribute("aria-hidden", "true");
