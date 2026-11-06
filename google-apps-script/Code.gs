@@ -1,5 +1,4 @@
-// This is the Google Sheet ID (from its /spreadsheets/d/<ID>/edit URL),
-// not the Apps Script deployment ID.
+
 const SPREADSHEET_ID = "1BvzKgFkpAou14qO6251ziCuMcUNY1_dlJ8hBq_gGHLc";
 
 function doGet(e) {
