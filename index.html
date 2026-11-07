@@ -186,6 +186,8 @@
         <p class="gift-modal__hint">Mở ứng dụng ngân hàng và quét mã QR để gửi lời chúc mừng.</p>
         <img class="gift-modal__qr" src="assets/qr-gift-cropped.png?v=20261105-01" alt="Mã QR VietQR của Phan Hiếu Lễ để gửi quà mừng cưới">
         <div class="gift-modal__bank-choice">
+          <label for="giftAmount">Số tiền muốn mừng (VNĐ)</label>
+          <input id="giftAmount" type="number" inputmode="numeric" min="1000" step="1000" placeholder="Ví dụ: 500000">
           <label for="giftBankApp">Chọn ngân hàng bạn đang dùng</label>
           <select id="giftBankApp">
             <option value="">Chọn ngân hàng</option>
@@ -220,7 +222,7 @@
             <option value="wvn">Woori WON Vietnam</option>
           </select>
           <a class="button button--primary gift-modal__qr-open" id="giftBankOpen" href="https://www.vietqr.io/deeplink/bank-apps" target="_blank" rel="noopener" aria-describedby="giftBankHint">Mở màn hình chuyển khoản</a>
-          <p class="gift-modal__bank-hint" id="giftBankHint">Chọn ngân hàng để mở màn hình chuyển khoản với thông tin người nhận điền sẵn nếu app hỗ trợ. Khách nhập số tiền trong app và kiểm tra lại trước khi xác nhận.</p>
+          <p class="gift-modal__bank-hint" id="giftBankHint">ACB ONE, BIDV, OCB OMNI, MB Bank và VietinBank iPay hỗ trợ điền sẵn thông tin theo deeplink. Với app khác, có thể cần quét QR thủ công. Luôn kiểm tra người nhận và số tiền trước khi xác nhận.</p>
           <a class="gift-modal__qr-download" href="assets/qr-gift-cropped.png" download="ma-qr-mung-cuoi.png">Tải ảnh mã QR</a>
         </div>
       </section>

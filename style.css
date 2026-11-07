@@ -3063,7 +3063,8 @@ body {
   font-weight: 700;
 }
 
-.gift-modal__bank-choice select {
+.gift-modal__bank-choice select,
+.gift-modal__bank-choice input {
   width: 100%;
   min-height: 46px;
   padding: 10px 12px;

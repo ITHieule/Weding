@@ -660,6 +660,7 @@ function setupGiftBox() {
   const modal = document.getElementById("giftModal");
   const closeButton = document.getElementById("closeGift");
   const backdrop = document.getElementById("giftBackdrop");
+  const amountInput = document.getElementById("giftAmount");
   const bankSelect = document.getElementById("giftBankApp");
   const bankOpenLink = document.getElementById("giftBankOpen");
   if (!openButtons.length || !modal || !closeButton || !backdrop) return;
@@ -667,14 +668,17 @@ function setupGiftBox() {
 
   const updateBankLink = () => {
     const appId = bankSelect?.value || "";
+    const amount = Number(amountInput?.value);
+    const isValidAmount = Number.isSafeInteger(amount) && amount >= 1000;
     if (!bankOpenLink) return;
-    const isSelected = Boolean(appId);
-    bankOpenLink.setAttribute("aria-disabled", String(!isSelected));
-    bankOpenLink.tabIndex = isSelected ? 0 : -1;
-    if (isSelected) {
+    const isReady = Boolean(appId) && isValidAmount;
+    bankOpenLink.setAttribute("aria-disabled", String(!isReady));
+    bankOpenLink.tabIndex = isReady ? 0 : -1;
+    if (isReady) {
       const params = new URLSearchParams({
         app: appId,
         ba: "0963845867@mb",
+        am: String(amount),
         tn: "MUNG CUOI",
         bn: "PHAN HIEU LE",
         url: `${window.location.origin}${window.location.pathname}`
@@ -685,11 +689,18 @@ function setupGiftBox() {
     }
   };
 
+  amountInput?.addEventListener("input", updateBankLink);
   bankSelect?.addEventListener("change", updateBankLink);
   bankOpenLink?.addEventListener("click", (event) => {
+    const amount = Number(amountInput?.value);
+    if (!Number.isSafeInteger(amount) || amount < 1000) {
+      event.preventDefault();
+      amountInput?.focus();
+      return;
+    }
     if (!bankSelect?.value) {
       event.preventDefault();
-      bankSelect?.focus();
+      bankSelect.focus();
     }
   });
   updateBankLink();
