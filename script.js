@@ -675,17 +675,15 @@ function setupGiftBox() {
     bankOpenLink.setAttribute("aria-disabled", String(!isReady));
     bankOpenLink.tabIndex = isReady ? 0 : -1;
     if (isReady) {
-      const deeplinkParams = {
+      const params = new URLSearchParams({
         app: appId,
         ba: "0963845867@mb",
         am: String(amount),
         tn: "MUNG CUOI PHAN HIEU LE & HUYNH LE HOAI NGOC",
-        bn: "PHAN HIEU LE"
-      };
-      const deeplinkHost = appId === "stb" ? "https://qr.beepay.vn/pay" : "https://dl.vietqr.io/pay";
-      if (appId !== "stb") deeplinkParams.url = `${window.location.origin}${window.location.pathname}`;
-      const params = new URLSearchParams(deeplinkParams);
-      bankOpenLink.href = `${deeplinkHost}?${params.toString()}`;
+        bn: "PHAN HIEU LE",
+        url: `${window.location.origin}${window.location.pathname}`
+      });
+      bankOpenLink.href = `https://dl.vietqr.io/pay?${params.toString()}`;
     } else {
       bankOpenLink.href = "#giftBankApp";
     }
