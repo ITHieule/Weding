@@ -15,7 +15,7 @@ const CARD_CONFIGS = {
     brideImage: "assets/wife.jpg?v=20260512-03",
     groomImage: "assets/husband.jpg?v=20260512-03",
     brideParents: "Ông Huỳnh Văn Hưng\nBà Lê Thị Mỹ Linh",
-    groomParents: "Ông Phan Thanh Tân\nBà Phạm Thị Rành",
+    groomParents: "Ông Phan Thanh Tần\nBà Phạm Thị Rành",
     brideBio: "Ái Nữ.",
     groomBio: "Quý Nam.",
     gallery: [
