@@ -3642,6 +3642,12 @@ body {
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.22);
 }
 
+.thanks__content .eyebrow {
+  color: #fff;
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
 @media (max-width: 560px) {
   .thanks__content {
     width: calc(100% - 36px);
@@ -4370,4 +4376,26 @@ body.invite-opened .sample-cover__content {
   .opening-flourish--bottom {
     margin-top: 10px;
   }
+}
+
+/* Mark the wedding dates with hearts instead of circular fills. */
+.save-date-calendar .is-wedding-day {
+  position: relative;
+  z-index: 0;
+  width: 34px;
+  min-height: 34px;
+  justify-self: center;
+  border-radius: 0;
+  clip-path: polygon(50% 100%, 9% 59%, 2% 47%, 0 34%, 3% 21%, 11% 10%, 24% 5%, 37% 8%, 50% 20%, 63% 8%, 76% 5%, 89% 10%, 97% 21%, 100% 34%, 98% 47%, 91% 59%);
+  color: #fff;
+  background: var(--rose-deep);
+  box-shadow: none;
+}
+
+.schedule-card .save-date-calendar .is-wedding-day {
+  width: 30px;
+  min-height: 30px;
+  border-radius: 0;
+  clip-path: polygon(50% 100%, 9% 59%, 2% 47%, 0 34%, 3% 21%, 11% 10%, 24% 5%, 37% 8%, 50% 20%, 63% 8%, 76% 5%, 89% 10%, 97% 21%, 100% 34%, 98% 47%, 91% 59%);
+  background: var(--rose-deep);
 }

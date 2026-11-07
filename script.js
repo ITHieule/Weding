@@ -14,10 +14,10 @@ const CARD_CONFIGS = {
     mapEmbedUrl: "https://www.google.com/maps?q=10.2503611,105.2541111&z=16&output=embed",
     brideImage: "assets/wife.jpg?v=20260512-03",
     groomImage: "assets/husband.jpg?v=20260512-03",
-    brideParents: "Ông Huỳnh Văn Hùng\nBà Lê Thị Mỹ Linh",
+    brideParents: "Ông Huỳnh Văn Hưng\nBà Lê Thị Mỹ Linh",
     groomParents: "Ông Phan Thanh Tân\nBà Phạm Thị Rành",
-    brideBio: "Ái nữ của gia đình, trân quý những khoảnh khắc sum vầy.",
-    groomBio: "Út nam của gia đình, chân thành và luôn hướng về tổ ấm.",
+    brideBio: "Ái Nữ.",
+    groomBio: "Quý Nam.",
     gallery: [
       "assets/gallery-1.jpg",
       "assets/gallery-2.jpg",
