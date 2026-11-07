@@ -671,9 +671,18 @@ function setupGiftBox() {
     const isSelected = Boolean(appId);
     bankOpenLink.setAttribute("aria-disabled", String(!isSelected));
     bankOpenLink.tabIndex = isSelected ? 0 : -1;
-    bankOpenLink.href = isSelected
-      ? `https://dl.vietqr.io/pay?app=${encodeURIComponent(appId)}`
-      : "#giftBankApp";
+    if (isSelected) {
+      const params = new URLSearchParams({
+        app: appId,
+        ba: "0963845867@mb",
+        tn: "MUNG CUOI",
+        bn: "PHAN HIEU LE",
+        url: `${window.location.origin}${window.location.pathname}`
+      });
+      bankOpenLink.href = `https://dl.vietqr.io/pay?${params.toString()}`;
+    } else {
+      bankOpenLink.href = "#giftBankApp";
+    }
   };
 
   bankSelect?.addEventListener("change", updateBankLink);
