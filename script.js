@@ -656,28 +656,52 @@ function createWishText(text, className) {
 }
 
 function setupGiftBox() {
-  const openButton = document.getElementById("openGift");
+  const openButtons = [...document.querySelectorAll("[data-open-gift]")];
   const modal = document.getElementById("giftModal");
   const closeButton = document.getElementById("closeGift");
   const backdrop = document.getElementById("giftBackdrop");
-  if (!openButton || !modal || !closeButton || !backdrop) return;
+  const bankSelect = document.getElementById("giftBankApp");
+  const bankOpenLink = document.getElementById("giftBankOpen");
+  if (!openButtons.length || !modal || !closeButton || !backdrop) return;
+  let lastOpenButton = openButtons[0];
+
+  const updateBankLink = () => {
+    const appId = bankSelect?.value || "";
+    if (!bankOpenLink) return;
+    const isSelected = Boolean(appId);
+    bankOpenLink.setAttribute("aria-disabled", String(!isSelected));
+    bankOpenLink.tabIndex = isSelected ? 0 : -1;
+    bankOpenLink.href = isSelected
+      ? `https://dl.vietqr.io/pay?app=${encodeURIComponent(appId)}`
+      : "#giftBankApp";
+  };
+
+  bankSelect?.addEventListener("change", updateBankLink);
+  bankOpenLink?.addEventListener("click", (event) => {
+    if (!bankSelect?.value) {
+      event.preventDefault();
+      bankSelect?.focus();
+    }
+  });
+  updateBankLink();
 
   const closeModal = () => {
     if (modal.hidden) return;
     modal.classList.remove("is-visible");
-    openButton.setAttribute("aria-expanded", "false");
+    openButtons.forEach((button) => button.setAttribute("aria-expanded", "false"));
     document.body.classList.remove("no-scroll");
     window.setTimeout(() => { modal.hidden = true; }, 240);
-    openButton.focus();
+    lastOpenButton.focus();
   };
 
-  openButton.addEventListener("click", () => {
+  openButtons.forEach((button) => button.addEventListener("click", () => {
+    lastOpenButton = button;
     modal.hidden = false;
     document.body.classList.add("no-scroll");
-    openButton.setAttribute("aria-expanded", "true");
+    openButtons.forEach((openButton) => openButton.setAttribute("aria-expanded", "true"));
     requestAnimationFrame(() => modal.classList.add("is-visible"));
     closeButton.focus();
-  });
+  }));
   closeButton.addEventListener("click", closeModal);
   backdrop.addEventListener("click", closeModal);
   document.addEventListener("keydown", (event) => {

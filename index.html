@@ -157,7 +157,7 @@
           <h2 class="section-title">Hộp Mừng Cưới</h2>
           <p class="gift-section__copy">Tình cảm và lời chúc của bạn là món quà quý giá nhất. Nếu muốn gửi quà mừng, xin chạm vào túi đỏ bên dưới.</p>
         </div>
-        <button class="gift-pouch" id="openGift" type="button" aria-expanded="false" aria-controls="giftModal">
+        <button class="gift-pouch" id="openGift" data-open-gift type="button" aria-expanded="false" aria-controls="giftModal">
           <svg class="gift-pouch__art" viewBox="0 0 180 180" aria-hidden="true">
             <defs>
               <linearGradient id="pouchRed" x1="0" y1="0" x2="1" y2="1">
@@ -185,6 +185,44 @@
         <h2 id="giftModalTitle">Quà mừng cưới</h2>
         <p class="gift-modal__hint">Mở ứng dụng ngân hàng và quét mã QR để gửi lời chúc mừng.</p>
         <img class="gift-modal__qr" src="assets/qr-gift-cropped.png?v=20261105-01" alt="Mã QR VietQR của Phan Hiếu Lễ để gửi quà mừng cưới">
+        <div class="gift-modal__bank-choice">
+          <label for="giftBankApp">Chọn ngân hàng bạn đang dùng</label>
+          <select id="giftBankApp">
+            <option value="">Chọn ngân hàng</option>
+            <option value="acb">ACB ONE</option>
+            <option value="abb">ABBank</option>
+            <option value="bidv">BIDV SmartBanking</option>
+            <option value="vba">Agribank Plus</option>
+            <option value="cake">CAKE</option>
+            <option value="cimb">CIMB Octo</option>
+            <option value="eib">Eximbank EDigi</option>
+            <option value="hdb">HDBank</option>
+            <option value="icb">VietinBank iPay</option>
+            <option value="klb">KienlongBank Plus</option>
+            <option value="lpb">LPBank</option>
+            <option value="mb">MB Bank</option>
+            <option value="nab">Nam A Bank</option>
+            <option value="ncb">NCB iziMobile</option>
+            <option value="ocb">OCB OMNI</option>
+            <option value="pbvn">PB engage VN</option>
+            <option value="pvcb">PVConnect</option>
+            <option value="scb">SCB Mobile Banking</option>
+            <option value="seab">SeAMobile</option>
+            <option value="shb">SHB SAHA</option>
+            <option value="shbvn">Shinhan SOL</option>
+            <option value="tcb">Techcombank Mobile</option>
+            <option value="timo">Timo</option>
+            <option value="tpb">TPBank Mobile</option>
+            <option value="vab">Vietbank Digital Plus</option>
+            <option value="vcb">VCB Digibank</option>
+            <option value="vib">MyVIB</option>
+            <option value="vpb">VPBank NEO</option>
+            <option value="wvn">Woori WON Vietnam</option>
+          </select>
+          <a class="button button--primary gift-modal__qr-open" id="giftBankOpen" href="https://www.vietqr.io/deeplink/bank-apps" target="_blank" rel="noopener" aria-describedby="giftBankHint">Mở ứng dụng ngân hàng</a>
+          <p class="gift-modal__bank-hint" id="giftBankHint">Chọn ngân hàng sẽ mở app tương ứng. Nếu app cần ảnh QR để quét, hãy tải mã về trước; hoặc dùng thiết bị khác để quét.</p>
+          <a class="gift-modal__qr-download" href="assets/qr-gift-cropped.png" download="ma-qr-mung-cuoi.png">Tải ảnh mã QR</a>
+        </div>
       </section>
     </div>
 

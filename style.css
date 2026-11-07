@@ -3039,6 +3039,61 @@ body {
   transform: translateY(-5px) rotate(-3deg);
 }
 
+.gift-modal__qr-open {
+  display: flex;
+  width: min(100%, 320px);
+  min-height: 46px;
+  margin: 12px auto 2px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.gift-modal__bank-choice {
+  display: grid;
+  gap: 9px;
+  width: min(100%, 320px);
+  margin: 16px auto 0;
+  text-align: left;
+}
+
+.gift-modal__bank-choice label {
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.gift-modal__bank-choice select {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid rgba(29, 73, 57, 0.22);
+  border-radius: 10px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
+}
+
+.gift-modal__qr-open[aria-disabled="true"] {
+  opacity: 0.55;
+}
+
+.gift-modal__bank-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.gift-modal__qr-download {
+  justify-self: center;
+  padding: 4px 8px 8px;
+  color: var(--rose-deep);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .gift-modal {
   position: fixed;
   inset: 0;
