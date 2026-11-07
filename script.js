@@ -679,7 +679,7 @@ function setupGiftBox() {
         app: appId,
         ba: "0963845867@mb",
         am: String(amount),
-        tn: "MUNG CUOI",
+        tn: "MUNG CUOI PHAN HIEU LE & HUYNH LE HOAI NGOC",
         bn: "PHAN HIEU LE",
         url: `${window.location.origin}${window.location.pathname}`
       });
