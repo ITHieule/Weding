@@ -56,6 +56,8 @@ const state = {
   config: mergeConfig(getCurrentConfig()),
   countdownInterval: null,
   musicStarted: false,
+  musicPlayPromise: null,
+  lastMusicTouchAt: 0,
   lightboxRequestId: 0
 };
 
@@ -208,9 +210,37 @@ function renderGallery() {
     </button>
   `).join("");
   gallery.querySelectorAll(".gallery__item").forEach((button) => {
-    button.addEventListener("click", () => {
+    const openButtonImage = () => {
       const thumbnail = button.querySelector("img");
       openGalleryImage(button.dataset.full, thumbnail?.currentSrc || thumbnail?.src);
+    };
+    let touchStart = null;
+    let lastTouchOpenAt = 0;
+
+    button.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch") {
+        touchStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
+      }
+    });
+    button.addEventListener("pointerup", (event) => {
+      if (event.pointerType !== "touch" || !touchStart || touchStart.id !== event.pointerId) return;
+      const moved = Math.hypot(event.clientX - touchStart.x, event.clientY - touchStart.y);
+      touchStart = null;
+      if (moved > 12) return;
+
+      event.preventDefault();
+      lastTouchOpenAt = performance.now();
+      openButtonImage();
+    });
+    button.addEventListener("pointercancel", () => {
+      touchStart = null;
+    });
+    button.addEventListener("click", () => {
+      if (lastTouchOpenAt && performance.now() - lastTouchOpenAt < 800) {
+        lastTouchOpenAt = 0;
+        return;
+      }
+      openButtonImage();
     });
   });
 }
@@ -230,8 +260,11 @@ function openGalleryImage(src, previewSrc = src) {
     imageElement.classList.add("is-visible");
   };
 
+  let fullLoadStarted = false;
   const loadFullImage = () => {
+    if (fullLoadStarted) return;
     if (!src || src === previewSrc) return;
+    fullLoadStarted = true;
     const fullImage = new Image();
     fullImage.decoding = "async";
     fullImage.onload = () => {
@@ -245,24 +278,17 @@ function openGalleryImage(src, previewSrc = src) {
     fullImage.src = src;
   };
 
-  const previewImage = new Image();
-  previewImage.decoding = "async";
-  previewImage.onload = () => {
-    const showPreview = () => {
-      showImage(previewSrc || src);
-      loadFullImage();
-    };
-    if (typeof previewImage.decode === "function") {
-      previewImage.decode().then(showPreview).catch(showPreview);
-    } else {
-      showPreview();
-    }
-  };
-  previewImage.onerror = () => {
-    showImage(src);
+  imageElement.onload = () => {
+    if (requestId !== state.lightboxRequestId || !selectors.lightbox.classList.contains("is-open")) return;
+    imageElement.classList.add("is-visible");
     loadFullImage();
   };
-  previewImage.src = previewSrc || src;
+  imageElement.onerror = loadFullImage;
+  imageElement.src = previewSrc || src;
+  if (imageElement.complete && imageElement.naturalWidth > 0) {
+    imageElement.classList.add("is-visible");
+    loadFullImage();
+  }
 }
 function withAssetVersion(src) {
   const separator = src.includes("?") ? "&" : "?";
@@ -407,7 +433,19 @@ function setupReveal() {
 }
 
 function setupMusic() {
-  selectors.musicToggle.addEventListener("click", toggleMusic);
+  selectors.musicToggle.addEventListener("pointerup", (event) => {
+    if (event.pointerType !== "touch") return;
+    event.preventDefault();
+    state.lastMusicTouchAt = performance.now();
+    toggleMusic();
+  });
+  selectors.musicToggle.addEventListener("click", () => {
+    if (state.lastMusicTouchAt && performance.now() - state.lastMusicTouchAt < 800) {
+      state.lastMusicTouchAt = 0;
+      return;
+    }
+    toggleMusic();
+  });
 }
 
 async function toggleMusic() {
@@ -420,13 +458,24 @@ async function toggleMusic() {
 }
 
 async function playMusic() {
+  if (state.musicPlayPromise) return state.musicPlayPromise;
+  if (!selectors.music.paused) {
+    state.musicStarted = true;
+    selectors.musicToggle.classList.add("is-playing");
+    return;
+  }
+
+  const playPromise = selectors.music.play();
+  state.musicPlayPromise = playPromise;
   try {
-    await selectors.music.play();
+    await playPromise;
     state.musicStarted = true;
     selectors.musicToggle.classList.add("is-playing");
   } catch (error) {
     selectors.musicToggle.classList.remove("is-playing");
-    console.warn("Không thể phát nhạc nền. Kiểm tra file assets/Lễ Đường.mp3 hoặc assets/music.mp3.", error);
+    console.warn("Không thể phát nhạc nền. Kiểm tra file assets/11 Ordinary.mp3 hoặc thao tác bật nhạc trên điện thoại.", error);
+  } finally {
+    if (state.musicPlayPromise === playPromise) state.musicPlayPromise = null;
   }
 }
 
@@ -449,6 +498,10 @@ function setupOpenInvite() {
       curtain.classList.add("is-open");
       window.scrollTo(0, 0);
     }, 2200);
+  });
+
+  selectors.openInvite.addEventListener("pointerup", (event) => {
+    if (event.pointerType === "touch" && !state.musicStarted) playMusic();
   });
 }
 
