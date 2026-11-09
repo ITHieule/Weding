@@ -4443,7 +4443,6 @@ body.invite-opened .sample-cover__content {
   }
 }
 
-/* Mark the wedding dates with hearts instead of circular fills. */
 .save-date-calendar .is-wedding-day {
   position: relative;
   z-index: 0;
