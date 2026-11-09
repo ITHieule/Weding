@@ -7,7 +7,7 @@ const CARD_CONFIGS = {
     weddingEndDate: "29/11/2026",
     weddingDisplayDate: "Thứ Bảy - Chủ Nhật | 28–29.11.2026",
     lunarDate: "Nhằm ngày 20–21 tháng 10 năm Bính Ngọ",
-    partyTime: "09:00",
+    partyTime: "10:30",
     venueName: "Tư gia",
     weddingAddress: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang",
     mapDirectionUrl: "https://www.google.com/maps/place/10%C2%B015'01.3%22N+105%C2%B015'14.8%22E/@10.2511493,105.2507882,1297m/data=!3m1!1e3!4m4!3m3!8m2!3d10.2503611!4d105.2541111?hl=vi&entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D",
@@ -39,7 +39,7 @@ const CARD_CONFIGS = {
       { icon: "∞", title: "Ngày chung vui", date: "Thứ Bảy - Chủ Nhật | 28–29.11.2026", text: "Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi." }
     ],
     schedule: [
-      { title: "Thời gian tổ chức", time: "09:00", date: "Thứ Bảy - Chủ Nhật | 28–29.11.2026", place: "Tư gia", address: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang" }
+      { title: "Thời gian tổ chức", time: "10:30", date: "Thứ Bảy - Chủ Nhật | 28–29.11.2026", place: "Tư gia", address: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang" }
     ]
   },
   "bao-tran-dai-phat": {
