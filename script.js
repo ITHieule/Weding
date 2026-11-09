@@ -55,7 +55,8 @@ const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbyhavXWOeGv9BZ0HI
 const state = {
   config: mergeConfig(getCurrentConfig()),
   countdownInterval: null,
-  musicStarted: false
+  musicStarted: false,
+  lightboxRequestId: 0
 };
 
 if ("scrollRestoration" in history) {
@@ -207,15 +208,61 @@ function renderGallery() {
     </button>
   `).join("");
   gallery.querySelectorAll(".gallery__item").forEach((button) => {
-    button.addEventListener("click", () => openGalleryImage(button.dataset.full));
+    button.addEventListener("click", () => {
+      const thumbnail = button.querySelector("img");
+      openGalleryImage(button.dataset.full, thumbnail?.currentSrc || thumbnail?.src);
+    });
   });
 }
 
-function openGalleryImage(src) {
-  selectors.lightboxImage.src = src;
+function openGalleryImage(src, previewSrc = src) {
+  const requestId = ++state.lightboxRequestId;
+  const imageElement = selectors.lightboxImage;
+  imageElement.classList.remove("is-visible");
+  imageElement.removeAttribute("src");
   selectors.lightbox.classList.add("is-open");
   selectors.lightbox.setAttribute("aria-hidden", "false");
   document.body.classList.add("no-scroll");
+
+  const showImage = (imageSrc) => {
+    if (requestId !== state.lightboxRequestId || !selectors.lightbox.classList.contains("is-open")) return;
+    imageElement.src = imageSrc;
+    imageElement.classList.add("is-visible");
+  };
+
+  const loadFullImage = () => {
+    if (!src || src === previewSrc) return;
+    const fullImage = new Image();
+    fullImage.decoding = "async";
+    fullImage.onload = () => {
+      const showFullImage = () => showImage(src);
+      if (typeof fullImage.decode === "function") {
+        fullImage.decode().then(showFullImage).catch(showFullImage);
+      } else {
+        showFullImage();
+      }
+    };
+    fullImage.src = src;
+  };
+
+  const previewImage = new Image();
+  previewImage.decoding = "async";
+  previewImage.onload = () => {
+    const showPreview = () => {
+      showImage(previewSrc || src);
+      loadFullImage();
+    };
+    if (typeof previewImage.decode === "function") {
+      previewImage.decode().then(showPreview).catch(showPreview);
+    } else {
+      showPreview();
+    }
+  };
+  previewImage.onerror = () => {
+    showImage(src);
+    loadFullImage();
+  };
+  previewImage.src = previewSrc || src;
 }
 function withAssetVersion(src) {
   const separator = src.includes("?") ? "&" : "?";
@@ -465,6 +512,7 @@ function setupLightbox() {
   });
 }
 function closeLightbox() {
+  state.lightboxRequestId += 1;
   selectors.lightbox.classList.remove("is-open");
   selectors.lightbox.setAttribute("aria-hidden", "true");
   document.body.classList.remove("no-scroll");
