@@ -470,14 +470,45 @@ async function playMusic() {
   try {
     await playPromise;
     state.musicStarted = true;
+    state.musicWanted = true;
     selectors.musicToggle.classList.add("is-playing");
   } catch (error) {
     selectors.musicToggle.classList.remove("is-playing");
     console.warn("Không thể phát nhạc nền. Kiểm tra file assets/11 Ordinary.mp3 hoặc thao tác bật nhạc trên điện thoại.", error);
+    retryMusicOnNextTouch();
   } finally {
     if (state.musicPlayPromise === playPromise) state.musicPlayPromise = null;
   }
 }
+
+// Nếu điện thoại chặn phát nhạc lần đầu, thử lại ở lần chạm kế tiếp của khách.
+function retryMusicOnNextTouch() {
+  if (state.musicRetryBound) return;
+  state.musicRetryBound = true;
+  const retry = () => {
+    state.musicRetryBound = false;
+    document.removeEventListener("touchend", retry, true);
+    document.removeEventListener("click", retry, true);
+    if (state.musicStarted || !selectors.music.paused) return;
+    selectors.music.load();
+    playMusic();
+  };
+  document.addEventListener("touchend", retry, true);
+  document.addEventListener("click", retry, true);
+}
+
+// Điện thoại khóa màn hình/chuyển app sẽ tự dừng nhạc: quay lại thì phát tiếp.
+document.addEventListener("visibilitychange", () => {
+  const music = selectors.music;
+  if (!music) return;
+  if (document.hidden) {
+    state.musicWanted = !music.paused;
+    return;
+  }
+  if (state.musicWanted && music.paused) {
+    music.play().catch(() => {});
+  }
+});
 
 function setupOpenInvite() {
   const curtain = document.getElementById("openingCurtain");
