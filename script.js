@@ -12,25 +12,25 @@ const CARD_CONFIGS = {
     weddingAddress: "Ấp Tây Bình, Thoại Giang, Thoại Sơn, An Giang",
     mapDirectionUrl: "https://www.google.com/maps/place/10%C2%B015'01.3%22N+105%C2%B015'14.8%22E/@10.2511493,105.2507882,1297m/data=!3m1!1e3!4m4!3m3!8m2!3d10.2503611!4d105.2541111?hl=vi&entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D",
     mapEmbedUrl: "https://www.google.com/maps?q=10.2503611,105.2541111&z=16&output=embed",
-    brideImage: "assets/CD.jpg?v=20261109-01",
-    groomImage: "assets/CR.jpg?v=20261109-01",
+    brideImage: "assets/optimized/full/bride.webp",
+    groomImage: "assets/optimized/full/groom.webp",
     brideParents: "Ông Huỳnh Văn Hưng\nBà Lê Thị Mỹ Linh",
     groomParents: "Ông Phan Thanh Tần\nBà Phạm Thị Rành",
     brideBio: "Ái Nữ.",
     groomBio: "Quý Nam.",
     gallery: [
-      "assets/TTT02613_(2).jpg",
-      "assets/TTT02631_(2).jpg",
-      "assets/TTT03004_1.jpg",
-      "assets/TTT03004_2.jpg",
-      "assets/TTT03208 copy.jpg",
-      "assets/TTT03326 copy.jpg",
-      "assets/TTT03491_1.jpg",
-      "assets/TTT03540_1.jpg",
-      "assets/TTT03724_1.jpg",
-      "assets/TTT03750.jpg",
-      "assets/TTT03759.jpg",
-      "assets/TTT04015_1.jpg"
+      "assets/optimized/full/gallery-01.webp",
+      "assets/optimized/full/gallery-02.webp",
+      "assets/optimized/full/gallery-03.webp",
+      "assets/optimized/full/gallery-04.webp",
+      "assets/optimized/full/gallery-05.webp",
+      "assets/optimized/full/gallery-06.webp",
+      "assets/optimized/full/gallery-07.webp",
+      "assets/optimized/full/gallery-08.webp",
+      "assets/optimized/full/gallery-09.webp",
+      "assets/optimized/full/gallery-10.webp",
+      "assets/optimized/full/gallery-11.webp",
+      "assets/optimized/full/gallery-12.webp"
     ],
     story: [
       { icon: "✦", title: "Ngày gặp nhau", date: "Một ngày thật đẹp", text: "Từ những điều giản dị, hai gia đình cùng chứng kiến một hành trình yêu thương lớn dần." },
@@ -48,7 +48,7 @@ const CARD_CONFIGS = {
   }
 };
 
-const ASSET_VERSION = "20260512-03";
+const ASSET_VERSION = "20261109-02";
 // Paste the deployed Google Apps Script Web App URL here (ending in /exec).
 const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbyhavXWOeGv9BZ0HItTVsxBqn5VxjolCV7gczB65It_q9U024xQLt3wqg8yFnzmxL8/exec";
 
@@ -203,7 +203,7 @@ function renderGallery() {
   const gallery = document.getElementById("galleryGrid");
   gallery.innerHTML = state.config.gallery.map((src, index) => `
     <button class="gallery__item reveal" type="button" data-full="${withAssetVersion(src)}" aria-label="Mở ảnh cưới ${index + 1}">
-      <img src="${withAssetVersion(src)}" alt="Ảnh cưới ${index + 1}">
+      <img src="${withAssetVersion(src.replace('/full/', '/thumbs/'))}" alt="Ảnh cưới ${index + 1}" loading="lazy" decoding="async">
     </button>
   `).join("");
   gallery.querySelectorAll(".gallery__item").forEach((button) => {
