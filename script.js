@@ -95,7 +95,6 @@ function init() {
   setupLightbox();
   setupMap();
   setupGuestForms();
-  setupGiftBox();
   setupParallax();
   setupScrollProgress();
 }
@@ -793,80 +792,6 @@ function createWishText(text, className) {
   element.className = className;
   element.textContent = String(text || "");
   return element;
-}
-
-function setupGiftBox() {
-  const openButtons = [...document.querySelectorAll("[data-open-gift]")];
-  const modal = document.getElementById("giftModal");
-  const closeButton = document.getElementById("closeGift");
-  const backdrop = document.getElementById("giftBackdrop");
-  const amountInput = document.getElementById("giftAmount");
-  const bankSelect = document.getElementById("giftBankApp");
-  const bankOpenLink = document.getElementById("giftBankOpen");
-  if (!openButtons.length || !modal || !closeButton || !backdrop) return;
-  let lastOpenButton = openButtons[0];
-
-  const updateBankLink = () => {
-    const appId = bankSelect?.value || "";
-    const amount = Number(amountInput?.value);
-    const isValidAmount = Number.isSafeInteger(amount) && amount >= 1000;
-    if (!bankOpenLink) return;
-    const isReady = Boolean(appId) && isValidAmount;
-    bankOpenLink.setAttribute("aria-disabled", String(!isReady));
-    bankOpenLink.tabIndex = isReady ? 0 : -1;
-    if (isReady) {
-      const params = new URLSearchParams({
-        app: appId,
-        ba: "0963845867@mb",
-        am: String(amount),
-        tn: "MUNG CUOI PHAN HIEU LE & HUYNH LE HOAI NGOC",
-        bn: "PHAN HIEU LE",
-        url: `${window.location.origin}${window.location.pathname}`
-      });
-      bankOpenLink.href = `https://dl.vietqr.io/pay?${params.toString()}`;
-    } else {
-      bankOpenLink.href = "#giftBankApp";
-    }
-  };
-
-  amountInput?.addEventListener("input", updateBankLink);
-  bankSelect?.addEventListener("change", updateBankLink);
-  bankOpenLink?.addEventListener("click", (event) => {
-    const amount = Number(amountInput?.value);
-    if (!Number.isSafeInteger(amount) || amount < 1000) {
-      event.preventDefault();
-      amountInput?.focus();
-      return;
-    }
-    if (!bankSelect?.value) {
-      event.preventDefault();
-      bankSelect.focus();
-    }
-  });
-  updateBankLink();
-
-  const closeModal = () => {
-    if (modal.hidden) return;
-    modal.classList.remove("is-visible");
-    openButtons.forEach((button) => button.setAttribute("aria-expanded", "false"));
-    document.body.classList.remove("no-scroll");
-    window.setTimeout(() => { modal.hidden = true; }, 240);
-    lastOpenButton.focus();
-  };
-
-  openButtons.forEach((button) => button.addEventListener("click", () => {
-    lastOpenButton = button;
-    modal.hidden = false;
-    document.body.classList.add("no-scroll");
-    openButtons.forEach((openButton) => openButton.setAttribute("aria-expanded", "true"));
-    requestAnimationFrame(() => modal.classList.add("is-visible"));
-    closeButton.focus();
-  }));
-  closeButton.addEventListener("click", closeModal);
-  backdrop.addEventListener("click", closeModal);
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeModal();
-  });
 }
 
 function setupPetals() {
